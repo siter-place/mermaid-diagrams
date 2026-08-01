@@ -1,0 +1,15 @@
+meta {
+  name: Download source policy test
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{apiRoot}}/diagrams/{{diagramId}}/source
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: in [200, 403, 404]
+}

@@ -23,11 +23,14 @@ Required defaults:
 - `securityLevel: 'strict'`;
 - `startOnLoad: false`;
 - lock security-critical configuration on the server/client normalization layer;
-- disable author-defined click callbacks and JavaScript behavior;
-- reject or neutralize unsafe HTML configuration;
+- disable author-defined click callbacks and JavaScript behavior (`click`, `callback` directives strictly denied in PHP and JS runtime);
+- deny security overrides in `%%{init:...}%%` or `securityLevel` mutations;
+- reject null bytes, inline `<script>` tags, and unsafe inline event attributes;
 - avoid external image/resource loading by default;
 - do not invoke `bindFunctions` unless a reviewed feature specifically requires safe link behavior;
-- sanitize SVG before export or persistence;
+- sanitize SVG before export or persistence using `sanitizeSvg` (stripping `<script>`, `<foreignObject>`, event attributes, and `javascript:` links);
+- inject accessibility metadata (`<title>`, `<desc>`, `role="img"`) for standard compliance;
+- run autonomous validation via local Node.js validation worker (`tools/validation-worker/validate.mjs`) using pinned `mermaid@11.4.1`;
 - keep Mermaid pinned to an audited version and update through controlled dependency PRs.
 
 A future relaxed mode must be an administrator-level security feature with an explicit risk assessment, not a per-block toggle.

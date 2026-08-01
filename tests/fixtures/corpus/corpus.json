@@ -1,0 +1,93 @@
+[
+  {
+    "id": "flowchart-simple",
+    "category": "supported-types",
+    "source": "flowchart LR\n  A --> B",
+    "expectedValid": true,
+    "expectedType": "flowchart"
+  },
+  {
+    "id": "sequence-simple",
+    "category": "supported-types",
+    "source": "sequenceDiagram\n  Alice->>Bob: Hello Bob",
+    "expectedValid": true,
+    "expectedType": "sequence"
+  },
+  {
+    "id": "class-simple",
+    "category": "supported-types",
+    "source": "classDiagram\n  class Animal {\n    +String name\n    +makeSound()\n  }",
+    "expectedValid": true,
+    "expectedType": "class"
+  },
+  {
+    "id": "state-simple",
+    "category": "supported-types",
+    "source": "stateDiagram-v2\n  [*] --> Still\n  Still --> [*]",
+    "expectedValid": true,
+    "expectedType": "state"
+  },
+  {
+    "id": "er-simple",
+    "category": "supported-types",
+    "source": "erDiagram\n  CUSTOMER {\n    string name\n  }\n  ORDER {\n    int id\n  }\n  CUSTOMER ||--o{ ORDER : places",
+    "expectedValid": true,
+    "expectedType": "er"
+  },
+  {
+    "id": "gantt-simple",
+    "category": "supported-types",
+    "source": "gantt\n  title A Gantt Diagram\n  section Section\n  A task :a1, 2026-08-01, 30d",
+    "expectedValid": true,
+    "expectedType": "gantt"
+  },
+  {
+    "id": "pie-simple",
+    "category": "supported-types",
+    "source": "pie title Key elements\n  \"Dogs\" : 386\n  \"Cats\" : 85",
+    "expectedValid": true,
+    "expectedType": "pie"
+  },
+  {
+    "id": "mindmap-simple",
+    "category": "supported-types",
+    "source": "mindmap\n  root((mindmap))\n    Origins\n      Long history",
+    "expectedValid": true,
+    "expectedType": "mindmap"
+  },
+  {
+    "id": "edge-subgraph",
+    "category": "edge-syntax",
+    "source": "flowchart TB\n  subgraph one [Section One]\n    a1 --> a2\n  end",
+    "expectedValid": true,
+    "expectedType": "flowchart"
+  },
+  {
+    "id": "denied-click-callback",
+    "category": "directives-denied",
+    "source": "flowchart LR\n  A --> B\n  click A call alert()",
+    "expectedValid": false,
+    "expectedType": "flowchart"
+  },
+  {
+    "id": "denied-security-override",
+    "category": "directives-denied",
+    "source": "%%{init: {\"securityLevel\": \"loose\"}}%%\nflowchart LR\n  A --> B",
+    "expectedValid": false,
+    "expectedType": "flowchart"
+  },
+  {
+    "id": "malicious-script-tag",
+    "category": "malicious",
+    "source": "flowchart LR\n  A[\"<script>alert(1)</script>\"] --> B",
+    "expectedValid": false,
+    "expectedType": "flowchart"
+  },
+  {
+    "id": "syntax-error-garbage",
+    "category": "regressions",
+    "source": "invalid %%% garbage syntax",
+    "expectedValid": false,
+    "expectedType": "unknown"
+  }
+]

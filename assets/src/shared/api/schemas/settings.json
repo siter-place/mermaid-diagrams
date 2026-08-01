@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SettingsResponse",
+  "type": "object",
+  "required": ["schema", "values", "capabilities", "runtime"],
+  "properties": {
+    "schema": { "type": "object" },
+    "values": { "type": "object" },
+    "capabilities": { "type": "object" },
+    "runtime": { "type": "object" }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "mermaid-diagrams",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "engines": {
     "node": ">=24.16.0",
@@ -22,10 +22,11 @@
     "lint:md": "markdownlint-cli2 'docs/**/*.md' 'README.md' 'AGENTS.md'",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "export NODE_OPTIONS='--experimental-vm-modules' && wp-scripts test-unit-js --config=jest.config.js",
+    "test:corpus": "export NODE_OPTIONS='--experimental-vm-modules' && wp-scripts test-unit-js --config=jest.config.js tests/js/corpus-parity.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:update": "playwright test --update-snapshots",
-    "test:rest": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local && cd ../bruno && bru run '01 Auth' --env Local",
+    "test:rest": "set -a; . ./.env; set +a; cd bruno && npx bru run --env Local",
     "test:rest:html": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local --reporter-html reports/smoke.html",
     "wp:setup": "node tools/wp-env/after-start.mjs",
     "update-version": "node scripts/increase-plugin-version.mjs",

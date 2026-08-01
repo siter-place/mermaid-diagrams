@@ -1,0 +1,34 @@
+meta {
+  name: Reject stale receipt
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{apiRoot}}/diagrams
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Stale Receipt Diagram",
+    "source": "flowchart TD\n  A --> B",
+    "validation": {
+      "sourceHash": "sha256:4d603a11e860959f9393963483fb69b76eb14d101297585521b443048995a975",
+      "mermaidVersion": "11.4.1",
+      "diagramType": "flowchart",
+      "validatedAt": "2020-01-01T00:00:00.000Z",
+      "profile": "browser"
+    }
+  }
+}
+
+assert {
+  res.status: eq 422
+  res.body.code: eq "mdm_invalid_mermaid"
+}

@@ -34,7 +34,7 @@ These are implementation choices, not open product questions:
 2. Verify the selected Live Editor build can be emitted as a self-contained admin asset without a standalone SvelteKit server.
 3. Decide whether the project carries a maintained patch set, a fork, or a build-time adapter package; upgrades must be repeatable.
 4. Verify `getdokan/plugin-ui` peer dependencies against WordPress 7.0’s React runtime and isolate it through an adapter layer.
-5. Implement a proof-of-concept validation worker using the same Mermaid package version. Direct MCP persistence is disabled if this profile is not deployed.
+5. Implement a proof-of-concept validation worker using the same Mermaid package version. Direct MCP persistence is disabled if this profile is not deployed. **(Resolved in Phase 03 via ADR-021: Local Node.js Subprocess `tools/validation-worker/validate.mjs`)**
 6. Prove narrowly scoped, sanitized SVG media upload and featured-image display in WordPress 7.0.
 7. Establish deterministic Playwright visual baselines under WSL2/Docker.
 8. Validate the standalone MCP Adapter plugin and Composer-package approaches; ship only one in production to avoid duplicate loading.

@@ -1,5 +1,5 @@
 meta {
-  name: Reject missing validation receipt
+  name: Reject missing receipt
   type: http
   seq: 1
 }
@@ -10,14 +10,18 @@ post {
   auth: inherit
 }
 
+headers {
+  Content-Type: application/json
+}
+
 body:json {
   {
-    "title": "Must fail",
-    "source": "flowchart LR\n  A -->",
-    "status": "draft"
+    "title": "Invalid Unvalidated Diagram",
+    "source": "invalid mermaid code -->>> syntax error"
   }
 }
 
 assert {
-  res.status: in [400, 422]
+  res.status: eq 422
+  res.body.code: eq "mdm_invalid_mermaid"
 }

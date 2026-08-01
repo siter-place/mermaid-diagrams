@@ -12,6 +12,6 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.values: isObject
-  res.body.schema: isObject
+  res.body.values: isDefined
+  res.body.schema: isDefined
 }

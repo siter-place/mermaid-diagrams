@@ -10,7 +10,7 @@ A version change is one coordinated operation. The plugin version, active source
 The target release version is entered locally in `.env`:
 
 ```dotenv
-TARGET_VERSION=1.1.0
+TARGET_VERSION=1.2.0
 TARGET_VERSION_DATE=2026-08-15
 TARGET_VERSION_CHANGELOG=Summarize the release-level change.
 TARGET_VERSION_DECISION=Explain why this version was approved.
@@ -67,14 +67,14 @@ The script scans text files and replaces the exact previous plugin version. This
 
 ```php
 /**
- * Version: 1.0.0
+ * Version: 1.2.0
  */
 
-define( 'MDM_VERSION', '1.0.0' );
+define( 'MDM_VERSION', '1.2.0' );
 ```
 
 ```text
-Stable tag: 1.0.0
+Stable tag: 1.2.0
 ```
 
 It also updates matching active references in PHP, JavaScript, TypeScript, CSS, Markdown, XML, YAML, `block.json`, build configuration, and `.env.example`.

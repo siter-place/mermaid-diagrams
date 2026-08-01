@@ -477,9 +477,14 @@ Every mutation that changes Mermaid source requires:
 }
 ```
 
-The server rejects missing, mismatched, stale-beyond-policy, unsupported-version, or forged worker receipts. A browser receipt is accepted only for normal authenticated admin UI routes and is not sufficient for autonomous MCP persistence when the worker profile is required.
+The server rejects missing, mismatched, stale-beyond-policy (15 min TTL), unsupported-version, or forged worker receipts with HTTP 422 (`mdm_invalid_mermaid`). A browser receipt is accepted for normal authenticated admin UI routes, while worker profile (`profile: worker`) is required when the `X-MDM-Writer-Profile: autonomous` or `worker` header is present.
 
 Invalid Mermaid source has no persistence state. WordPress post status does not relax validation.
+
+### Download Endpoints
+
+- `GET /mdm/v1/diagrams/{id}/source`: Downloads raw `.mmd` source file. Enforces capability/visibility checks and settings (`downloads.allowSource`, `rendering.publicSourceAccess`, per-diagram `allowSourceDownload`). Headers set: `Content-Type: text/plain; charset=utf-8`, `Content-Disposition: attachment; filename="<slug>-<id>.mmd"`, `X-Content-Type-Options: nosniff`.
+- `GET /mdm/v1/diagrams/{id}/svg`: Downloads sanitized `.svg` diagram file. Enforces capability/visibility checks and settings (`downloads.allowSvg`, per-diagram `allowSvgDownload`). Headers set: `Content-Type: image/svg+xml`, `Content-Disposition: attachment; filename="<slug>-<id>.svg"`.
 
 ## 3.19 Usage index tables
 

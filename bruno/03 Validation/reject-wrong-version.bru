@@ -1,0 +1,48 @@
+meta {
+  name: Reject wrong version receipt
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{apiRoot}}/diagrams
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Wrong Version Diagram",
+    "source": "flowchart TD\n  A --> B",
+    "validation": {
+      "sourceHash": "sha256:4d603a11e860959f9393963483fb69b76eb14d101297585521b443048995a975",
+      "mermaidVersion": "10.9.0",
+      "diagramType": "flowchart",
+      "validatedAt": "2026-08-01T20:00:00.000Z",
+      "profile": "browser"
+    }
+  }
+}
+
+script:pre-request {
+  req.setBody({
+    title: "Wrong Version Diagram",
+    source: "flowchart TD\n  A --> B",
+    validation: {
+      sourceHash: "sha256:4d603a11e860959f9393963483fb69b76eb14d101297585521b443048995a975",
+      mermaidVersion: "10.9.0",
+      diagramType: "flowchart",
+      validatedAt: new Date().toISOString(),
+      profile: "browser"
+    }
+  });
+}
+
+assert {
+  res.status: eq 422
+  res.body.code: eq "mdm_invalid_mermaid"
+}

@@ -9,6 +9,7 @@ namespace WebFalcon\MermaidDiagrams\Bootstrap;
 
 use WebFalcon\MermaidDiagrams\Admin\AdminServiceProvider;
 use WebFalcon\MermaidDiagrams\Diagram\DiagramServiceProvider;
+use WebFalcon\MermaidDiagrams\Rest\RestServiceProvider;
 use WebFalcon\MermaidDiagrams\Upgrade\UpgradeServiceProvider;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +24,7 @@ class Plugin {
 	/**
 	 * Plugin version.
 	 */
-	public const VERSION = '1.0.0';
+	public const VERSION = '1.2.0';
 
 	/**
 	 * Singleton instance.
@@ -99,6 +100,7 @@ class Plugin {
 		$this->registry  = new ServiceProviderRegistry( $this->container );
 
 		$this->registry->add_provider( new DiagramServiceProvider() );
+		$this->registry->add_provider( new RestServiceProvider() );
 		$this->registry->add_provider( new AdminServiceProvider() );
 		$this->registry->add_provider( new UpgradeServiceProvider() );
 

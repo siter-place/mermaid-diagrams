@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiagramDetail",
+  "type": "object",
+  "required": ["id", "title", "source", "status", "versionToken"],
+  "properties": {
+    "id": { "type": "integer" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "source": { "type": "string" },
+    "type": { "type": "string" },
+    "status": { "type": "string" },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "slug"],
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "slug": { "type": "string" }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "slug"],
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "slug": { "type": "string" }
+        }
+      }
+    },
+    "versionToken": { "type": "string" },
+    "usageCount": { "type": "integer" }
+  }
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Conflict update diagram (stale token 409)
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{apiRoot}}/diagrams/{{diagramId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Stale Conflict Attempt",
+    "expectedVersion": "{{diagramVersion}}"
+  }
+}
+
+assert {
+  res.status: eq 409
+  res.body.code: eq "mdm_edit_conflict"
+  res.body.data.currentDiagram.id: isNumber
+}

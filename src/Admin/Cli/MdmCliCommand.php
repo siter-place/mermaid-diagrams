@@ -11,6 +11,7 @@ use WP_CLI;
 use WebFalcon\MermaidDiagrams\Bootstrap\Plugin;
 use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramCapabilities;
 use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramPostType;
+use WebFalcon\MermaidDiagrams\Infrastructure\Validation\NodeValidationWorker;
 use WebFalcon\MermaidDiagrams\Upgrade\UpgradeRunner;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -112,17 +113,33 @@ class MdmCliCommand {
 	}
 
 	/**
-	 * Validate diagram source records (Stub for Phase 03).
+	 * Validate diagram source string or file using the Node validation worker.
+	 *
+	 * ## OPTIONS
+	 *
+	 * [<source>]
+	 * : Mermaid diagram source string or path to .mmd file.
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp mdm validate
+	 *     wp mdm validate "flowchart TD\n  A --> B"
 	 *
 	 * @when after_wp_load
 	 * @param array<string> $args Command arguments.
 	 */
 	public function validate( array $args = array() ): void {
-		unset( $args );
-		WP_CLI::log( 'CLI batch validation service is scheduled for Phase 03.' );
+		$raw = $args[0] ?? "flowchart LR\n  A --> B";
+		if ( file_exists( $raw ) ) {
+			$raw = (string) file_get_contents( $raw );
+		}
+
+		$worker = new NodeValidationWorker();
+		$result = $worker->validate( $raw );
+
+		if ( ! empty( $result['valid'] ) ) {
+			WP_CLI::success( sprintf( 'Valid %s diagram (hash: %s, version: %s)', $result['diagramType'] ?? 'Mermaid', $result['sourceHash'] ?? '', $result['mermaidVersion'] ?? '' ) );
+		} else {
+			WP_CLI::error( sprintf( 'Validation failed: %s', $result['error'] ?? 'Syntax or constraint error' ) );
+		}
 	}
 }

@@ -1,0 +1,34 @@
+meta {
+  name: Update diagram
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{apiRoot}}/diagrams/{{diagramId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Bruno Flow Updated",
+    "expectedVersion": "{{diagramVersion}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.title: eq "Bruno Flow Updated"
+  res.body.versionToken: isString
+}
+
+script:post-response {
+  if (res.body && res.body.versionToken) {
+    bru.setVar("updatedVersion", res.body.versionToken);
+  }
+}

@@ -3,7 +3,7 @@ const defaultConfig = require('@wordpress/scripts/config/jest-unit.config');
 module.exports = {
   ...defaultConfig,
   transform: {
-    '\\.[jt]sx?$': [
+    '^.+\\.[jt]sx?$': [
       'babel-jest',
       {
         presets: [

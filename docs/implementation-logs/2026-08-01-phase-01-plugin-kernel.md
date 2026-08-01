@@ -15,7 +15,7 @@
 - [x] Implement immutable domain value objects (`DiagramId`, `DiagramSource`, `SourceHash`, `DiagramTitle`, `DiagramDescription`, `DiagramStatus`, `DiagramType`, `DiagramVersion`, `ValidationReceipt`, `RenderConfig`)
 - [x] Implement lightweight DI container (`Container`) and service provider registry
 - [x] Implement `WordPressDiagramRepository` supporting CRUD, native revisions, trash, restore, duplicate
-- [x] Implement `UpgradeRunner` targeting DB version `1.0.0` with `{$prefix}mdm_usage` and `{$prefix}mdm_usage_dirty` tables
+- [x] Implement `UpgradeRunner` targeting DB version `1.2.0` with `{$prefix}mdm_usage` and `{$prefix}mdm_usage_dirty` tables
 - [x] Implement capabilities assignment and `wp mdm` CLI diagnostic commands
 - [x] Configure `uninstall.php` data retention policy (`preserve` by default)
 
@@ -68,5 +68,5 @@
 | Taxonomies | Category & Tag | `mdm_diagram_category` & `mdm_diagram_tag` | Fully registered |
 | Container | Zero-overhead DI | Custom `Container` & `ServiceProviderRegistry` | Clean architecture |
 | Meta Schema | Protected post meta | 9 meta fields registered | Immutable keys |
-| Database | Usage tables | `mdm_usage` and `mdm_usage_dirty` created | Version 1.0.0 schema |
+| Database | Usage tables | `mdm_usage` and `mdm_usage_dirty` created | Version 1.2.0 schema |
 | CLI Commands | Diagnostics | `wp mdm status`, `wp mdm capabilities repair` | Registered and tested |

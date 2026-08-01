@@ -99,7 +99,7 @@ test('handles target version already implemented gracefully', async () => {
 test('rejects a lower target version by default', async () => {
   const root = await createFixture();
   try {
-    await writeFile(join(root, 'version.env'), 'TARGET_VERSION=1.1.0\n', 'utf8');
+    await writeFile(join(root, 'version.env'), 'TARGET_VERSION=1.2.0\n', 'utf8');
     const result = runCli(root);
     assert.equal(result.status, 1);
     assert.match(result.stderr, /lower than current version/);

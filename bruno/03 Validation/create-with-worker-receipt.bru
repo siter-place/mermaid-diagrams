@@ -1,0 +1,48 @@
+meta {
+  name: Create with worker receipt
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{apiRoot}}/diagrams
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Valid Flowchart via Worker",
+    "source": "flowchart TD\n  A --> B",
+    "validation": {
+      "sourceHash": "sha256:1222fd6d86478178206dac9eea28f829446066311c6af339350b4241806259fe",
+      "mermaidVersion": "11.4.1",
+      "diagramType": "flowchart",
+      "validatedAt": "2026-08-01T20:00:00.000Z",
+      "profile": "worker"
+    }
+  }
+}
+
+script:pre-request {
+  req.setBody({
+    title: "Valid Flowchart via Worker",
+    source: "flowchart TD\n  A --> B",
+    validation: {
+      sourceHash: "sha256:1222fd6d86478178206dac9eea28f829446066311c6af339350b4241806259fe",
+      mermaidVersion: "11.4.1",
+      diagramType: "flowchart",
+      validatedAt: new Date().toISOString(),
+      profile: "worker"
+    }
+  });
+}
+
+assert {
+  res.status: eq 201
+  res.body.id: isNumber
+}

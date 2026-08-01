@@ -1,6 +1,6 @@
 # Changelog
 
-All notable implementation changes during phased delivery are recorded here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). The initial specification-package delta remains in `CHANGELOG-FROM-INITIAL-PACKAGE.md`.
+All notable implementation changes during phased delivery are recorded here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.2.0/). The initial specification-package delta remains in `CHANGELOG-FROM-INITIAL-PACKAGE.md`.
 
 ## [Unreleased]
 
@@ -16,7 +16,7 @@ All notable implementation changes during phased delivery are recorded here. For
 - Protected post meta registration for `_mdm_diagram_type`, `_mdm_render_config`, `_mdm_visual_model`, `_mdm_visual_adapter`, `_mdm_source_hash`, `_mdm_renderer_version`, `_mdm_validation_state`, `_mdm_validation_summary`, `_mdm_last_editor_id`.
 - Plugin capabilities matrix (`edit_mdm_diagrams`, `manage_mdm_settings`, etc.) with idempotent role assignment for Administrator and Editor roles.
 - `WordPressDiagramRepository` implementing CRUD, native revisions, trash, restore, and duplicate operations.
-- `UpgradeRunner` targeting DB version `1.0.0` with `dbDelta` creation of `{$prefix}mdm_usage` and `{$prefix}mdm_usage_dirty` tables.
+- `UpgradeRunner` targeting DB version `1.2.0` with `dbDelta` creation of `{$prefix}mdm_usage` and `{$prefix}mdm_usage_dirty` tables.
 - `uninstall.php` implementing configurable data retention policy (default `preserve`).
 - WP-CLI CLI commands `wp mdm status` and `wp mdm capabilities repair`.
 - Top-level Diagrams admin menu page (`mdm-diagrams`) rendering placeholder shell `#mdm-diagram-library-root`.

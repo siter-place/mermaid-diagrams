@@ -1,5 +1,27 @@
 # Implementation Decisions Log
 
+## REL-1.2.0 — Version 1.2.0
+
+- Date: 2026-08-01
+- Version: `1.2.0`
+- Previous version: `1.1.0`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.2.0](../CHANGELOG.md#120---2026-08-01)
+
+**Decision:** Phase 03 Mermaid Validation, Rendering, SVG, and Validation Worker phase closeout release.
+
+## REL-1.1.0 — Version 1.1.0
+
+- Date: 2026-08-01
+- Version: `1.1.0`
+- Previous version: `1.0.0`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.1.0](../CHANGELOG.md#110---2026-08-01)
+
+**Decision:** Phase 02 REST API, Settings, and Shared Contracts completion release.
+
 ## REL-1.0.0 — Version 1.0.0
 
 - Date: 2026-08-01
