@@ -15,6 +15,7 @@ use WP_REST_Server;
 use WebFalcon\MermaidDiagrams\Settings\Application\Command\UpdateSettingsSectionCommand;
 use WebFalcon\MermaidDiagrams\Settings\Application\Query\GetSettingsQuery;
 use WebFalcon\MermaidDiagrams\Settings\Application\Service\SettingsApplicationService;
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramCapabilities;
 use WebFalcon\MermaidDiagrams\Settings\Infrastructure\SettingsSchema;
 use WebFalcon\MermaidDiagrams\Support\WordPressErrorMapper;
 
@@ -96,7 +97,7 @@ class SettingsController extends WP_REST_Controller {
 	 * @return bool
 	 */
 	public function settings_permissions_check( $request ): bool {
-		return current_user_can( 'manage_options' );
+		return current_user_can( DiagramCapabilities::CAP_MANAGE_SETTINGS );
 	}
 
 	/**

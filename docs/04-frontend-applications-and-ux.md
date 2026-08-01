@@ -524,3 +524,14 @@ The Save button is disabled until the current source is valid and changed. Save 
 ## 4.11 Library launch scope
 
 Version 1.0 ships a performant table/list plus preview side panel. Featured SVG images are optional row previews and become the foundation for a later grid. Bulk categories use Add/Remove/Replace labels.
+
+## 4.12 Phase 04 admin bootstrap and test IDs
+
+Implemented in Phase 04 (ADR-022):
+
+- **Bootstrap global:** `window.mdmAdminBootstrap` with keys `screen`, `restRoot`, `nonce`, `locale`, `capabilities`, `routes`, `defaults`, `i18n`.
+- **Library test IDs:** `mdm-library-shell`, `mdm-library-loading`, `mdm-library-empty`, `mdm-library-error`, `mdm-diagram-table`, `mdm-library-pagination`.
+- **Settings test IDs:** `mdm-settings-shell`, `mdm-settings-loading`, `mdm-settings-error`, `mdm-settings-nav-{section}`, `mdm-settings-save`, `mdm-runtime-diagnostics`, `mdm-settings-permission-denied`.
+- **Screenshot baselines:** `tests/e2e/playwright/__screenshots__/chromium/tests/{admin-menu,library-shell,settings}.spec.ts/*.png`.
+- **Table markup:** native `widefat striped` HTML table (not `@wordpress/components` Table, which is unavailable in the pinned package).
+

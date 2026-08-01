@@ -38,7 +38,7 @@ class BootstrapTest extends TestCase {
 	 * Test plugin version constant.
 	 */
 	public function test_plugin_version(): void {
-		$this->assertSame( '1.2.0', Plugin::VERSION );
+		$this->assertSame( '1.3.0', Plugin::VERSION );
 	}
 
 	/**

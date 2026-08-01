@@ -1,5 +1,16 @@
 # Implementation Decisions Log
 
+## REL-1.3.0 — Version 1.3.0
+
+- Date: 2026-08-01
+- Version: `1.3.0`
+- Previous version: `1.2.0`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.3.0](../CHANGELOG.md#130---2026-08-01)
+
+**Decision:** Phase 04 React Diagram Library Shell and Settings UI phase closeout release.
+
 ## REL-1.2.0 — Version 1.2.0
 
 - Date: 2026-08-01
@@ -42,6 +53,16 @@ After each plan phase is finalized, append an entry with the phase ID, date, dec
 ## Entries
 
 <!-- Newest entries go at the top of this section. -->
+
+### 2026-08-01 — Phase 04 — React Diagram Library Shell and Settings UI
+
+- **Dual React Admin Apps:** Implemented `diagram-library` and `settings` webpack entry points with `AppProviders`, bootstrap context, and scoped `.mdm-app-root` CSS (ADR-022).
+- **PHP Admin Bootstrap:** Added `AdminRoute`, `ScreenBootstrapData`, `AdminAssets`, settings submenu, and `window.mdmAdminBootstrap` inline payload.
+- **List Shell:** Paginated HTML table with loading/empty/error states and URL `paged`/`per_page` sync; Phase 05 owns filters, preview, and row actions.
+- **Settings UI:** Six schema sections with dirty tracking, section-level PATCH save, server normalization, and runtime diagnostics panel.
+- **Permission Alignment:** Settings REST and bootstrap now gate on `manage_mdm_settings`.
+- **Table Markup:** Native `widefat striped` HTML table because `@wordpress/components` Table is unavailable in pinned package.
+- **ADRs Added:** ADR-022.
 
 ### 2026-08-01 — Phase 01 — Plugin Kernel, Domain Model, Storage, and Capabilities
 

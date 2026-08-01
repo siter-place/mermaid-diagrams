@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-08-01
+
+### Added
+- React diagram library admin app with paginated table shell, loading/empty/error states, and URL pagination sync.
+- React settings admin app with six section forms, dirty/save flow, runtime diagnostics, and permission gate.
+- PHP admin bootstrap (`AdminRoute`, `ScreenBootstrapData`, `AdminAssets`) and `window.mdmAdminBootstrap` contract.
+- ADR-022 React admin application architecture.
+
+### Changed
+- Settings REST permission aligned to `manage_mdm_settings` capability.
+- Admin library page now mounts React shell instead of Phase 01 placeholder notice.
+
 ## [1.2.0] - 2026-08-01
 
 ### Changed

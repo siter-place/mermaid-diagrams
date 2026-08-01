@@ -37,6 +37,7 @@ class AdminServiceProvider implements ServiceProvider {
 	 */
 	public function boot(): void {
 		add_action( 'admin_menu', array( AdminMenu::class, 'register_menu' ) );
+		AdminAssets::register();
 		MdmCliCommand::register();
 	}
 }

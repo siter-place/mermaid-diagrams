@@ -1,0 +1,108 @@
+/**
+ * Scoped admin application styles.
+ *
+ * @package WebFalcon\MermaidDiagrams
+ */
+
+.mdm-app-root {
+  --mdm-space-sm: 8px;
+  --mdm-space-md: 16px;
+  --mdm-space-lg: 24px;
+  --mdm-border-color: #dcdcde;
+  --mdm-muted-color: #646970;
+  margin-top: var(--mdm-space-md);
+}
+
+.mdm-app-root .mdm-app-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mdm-space-md);
+}
+
+.mdm-app-root .mdm-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mdm-space-md);
+  flex-wrap: wrap;
+}
+
+.mdm-app-root .mdm-table-wrap {
+  overflow-x: auto;
+}
+
+.mdm-app-root .mdm-type-badge {
+  display: inline-block;
+  margin-inline-start: var(--mdm-space-sm);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f0f0f1;
+  color: #1d2327;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+.mdm-app-root .mdm-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--mdm-space-md);
+}
+
+.mdm-app-root .mdm-settings-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: var(--mdm-space-lg);
+}
+
+.mdm-app-root .mdm-settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mdm-space-sm);
+}
+
+.mdm-app-root .mdm-settings-nav button {
+  text-align: start;
+}
+
+.mdm-app-root .mdm-settings-panel {
+  max-width: 720px;
+}
+
+.mdm-app-root .mdm-runtime-diagnostics {
+  margin-top: var(--mdm-space-lg);
+  padding: var(--mdm-space-md);
+  border: 1px solid var(--mdm-border-color);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.mdm-app-root .mdm-runtime-diagnostics dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--mdm-space-sm) var(--mdm-space-md);
+  margin: 0;
+}
+
+.mdm-app-root .mdm-skeleton-row {
+  height: 40px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f1 25%, #e0e0e0 50%, #f0f0f1 75%);
+  background-size: 200% 100%;
+  animation: mdm-skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes mdm-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 782px) {
+  .mdm-app-root .mdm-settings-layout {
+    grid-template-columns: 1fr;
+  }
+}

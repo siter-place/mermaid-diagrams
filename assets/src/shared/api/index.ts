@@ -1,7 +1,7 @@
 /**
  * Barrel Export for Shared API Package.
  *
- * @package WebFalcon\MermaidDiagrams
+ * @package
  */
 
 export * from './types';

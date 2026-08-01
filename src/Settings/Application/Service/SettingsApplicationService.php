@@ -7,6 +7,7 @@
 
 namespace WebFalcon\MermaidDiagrams\Settings\Application\Service;
 
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramCapabilities;
 use WebFalcon\MermaidDiagrams\Settings\Application\Command\UpdateSettingsSectionCommand;
 use WebFalcon\MermaidDiagrams\Settings\Application\Query\GetSettingsQuery;
 use WebFalcon\MermaidDiagrams\Settings\Infrastructure\SettingsRepository;
@@ -42,7 +43,7 @@ class SettingsApplicationService {
 			'schema'       => SettingsSchema::schema_definition(),
 			'values'       => $this->repository->get_all(),
 			'capabilities' => array(
-				'manageSettings' => current_user_can( 'manage_options' ),
+				'manageSettings' => current_user_can( DiagramCapabilities::CAP_MANAGE_SETTINGS ),
 			),
 			'runtime'      => array(
 				'pluginVersion'  => MDM_VERSION,
