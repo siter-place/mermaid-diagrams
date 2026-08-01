@@ -1,5 +1,16 @@
 # Implementation Decisions Log
 
+## REL-1.3.1 — Version 1.3.1
+
+- Date: 2026-08-01
+- Version: `1.3.1`
+- Previous version: `1.3.0`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.3.1](../CHANGELOG.md#131---2026-08-01)
+
+**Decision:** Phase 04 UI/UX Polish and Visual Design Overhaul release.
+
 ## REL-1.3.0 — Version 1.3.0
 
 - Date: 2026-08-01

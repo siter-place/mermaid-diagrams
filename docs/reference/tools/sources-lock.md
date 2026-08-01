@@ -4,8 +4,8 @@ Canonical tools, source dependencies, and libraries pinned and license-verified 
 
 | Tool | Canonical source | Selected version/commit | License verified | Notes |
 |---|---|---|---|---|
-| WordPress Agent Skills | https://github.com/WordPress/agent-skills | v1.3.0 (2026-08) | GPL-2.0-or-later | Coding-agent workflow and deterministic WordPress guidance |
-| Bruno Agent Skills | https://github.com/bruno-collections/bruno-agent-skills | v1.3.0 (2026-08) | MIT | Coding-agent guidance for Bruno collections, assertions, and CI |
+| WordPress Agent Skills | https://github.com/WordPress/agent-skills | v1.3.1 (2026-08) | GPL-2.0-or-later | Coding-agent workflow and deterministic WordPress guidance |
+| Bruno Agent Skills | https://github.com/bruno-collections/bruno-agent-skills | v1.3.1 (2026-08) | MIT | Coding-agent guidance for Bruno collections, assertions, and CI |
 | wp-env | https://github.com/WordPress/gutenberg/tree/trunk/packages/env | 11.12.0 | GPL-2.0-or-later | Docker-backed local WordPress development environment |
 | Playwright Test | https://playwright.dev/docs/intro | 1.62.1 | Apache-2.0 | Browser E2E and visual regression runner |
 | Playwright MCP | https://github.com/microsoft/playwright-mcp | 0.2.2 | MIT | Interactive browser control for coding agents |

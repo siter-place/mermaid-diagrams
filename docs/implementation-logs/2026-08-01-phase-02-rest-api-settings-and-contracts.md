@@ -3,7 +3,7 @@
 **Date:** 2026-08-01  
 **Phase ID:** Phase 02  
 **Phase Title:** REST API, Settings, Error Model, and Shared Contracts  
-**Version Increment:** `1.0.0` → `1.3.0`  
+**Version Increment:** `1.0.0` → `1.3.1`  
 **Status:** Completed & Finalized  
 
 ---
@@ -22,7 +22,7 @@
 - [x] Implement TypeScript contract layer, JSON Schemas, and REST API client in `assets/src/shared/api/` (`types.ts`, `client.ts`, `schemas/diagram.json`, `schemas/settings.json`, `index.ts`).
 - [x] Expand Bruno REST collection in `bruno/` covering all Phase 02 endpoints (`02 Diagrams/get-diagram.bru`, `update-diagram.bru`, `conflict-update.bru`, `06 Settings/patch-settings-section.bru`, `08 Usage/get-usage.bru`).
 - [x] Implement PHPUnit integration tests (`tests/phpunit/integration/RestApiEndpointsTest.php`), JS unit tests (`tests/js/api-client.test.ts`), and Playwright API smoke checks.
-- [x] Execute post-phase documentation and automated versioning closeout rule (`.cursor/rules/post-phase-documentation.mdc`) updating `.env`, version synchronization to `1.3.0`, decision log, and changelog.
+- [x] Execute post-phase documentation and automated versioning closeout rule (`.cursor/rules/post-phase-documentation.mdc`) updating `.env`, version synchronization to `1.3.1`, decision log, and changelog.
 
 ---
 
@@ -81,11 +81,11 @@
 - `docs/implementation-logs/2026-08-01-phase-02-rest-api-settings-and-contracts.md`
 
 ### Modified Files:
-- `mermaid-diagrams.php` (added `MDM_MERMAID_VERSION` constant, updated version header to `1.3.0`)
+- `mermaid-diagrams.php` (added `MDM_MERMAID_VERSION` constant, updated version header to `1.3.1`)
 - `src/Bootstrap/Plugin.php` (registered `RestServiceProvider`)
-- `package.json` & `package-lock.json` (updated version to `1.3.0` and `test:rest` script)
-- `CHANGELOG.md` (promoted Unreleased items under `[1.3.0] - 2026-08-01`)
-- `docs/decision-log.md` (added `REL-1.3.0` decision log entry)
+- `package.json` & `package-lock.json` (updated version to `1.3.1` and `test:rest` script)
+- `CHANGELOG.md` (promoted Unreleased items under `[1.3.1] - 2026-08-01`)
+- `docs/decision-log.md` (added `REL-1.3.1` decision log entry)
 - `.env` (updated target release metadata)
 
 ---

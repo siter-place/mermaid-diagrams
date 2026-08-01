@@ -68,7 +68,7 @@ describe('useSettingsSection', () => {
       },
       capabilities: { manageSettings: true },
       runtime: {
-        pluginVersion: '1.3.0',
+        pluginVersion: '1.3.1',
         mermaidVersion: '11.4.1',
         phpVersion: '8.3.0',
         wpVersion: '7.0',

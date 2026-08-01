@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-08-01
+
+### Changed
+
+- Overhauled Settings navigation (vertical tab layout with icons), WPDS Card panels, field help text, status badges, pagination summaries, and persistent UI/UX quality rules.
+
 ## [1.3.0] - 2026-08-01
 
 ### Added
