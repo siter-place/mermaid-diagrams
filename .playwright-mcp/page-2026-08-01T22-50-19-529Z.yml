@@ -1,0 +1,241 @@
+- generic [ref=f42e2]:
+  - navigation "Main menu":
+    - link "Skip to main content" [ref=f42e3] [cursor=pointer]:
+      - /url: "#wpbody-content"
+    - link "Skip to toolbar" [ref=f42e4] [cursor=pointer]:
+      - /url: "#wp-toolbar"
+    - list [ref=f42e7]:
+      - listitem [ref=f42e8]:
+        - link "Dashboard" [ref=f42e9] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=f42e10]: 
+        - list [ref=f42e12]:
+          - listitem [ref=f42e13]:
+            - link "Home" [ref=f42e14] [cursor=pointer]:
+              - /url: index.php
+          - listitem [ref=f42e15]:
+            - link "Updates" [ref=f42e16] [cursor=pointer]:
+              - /url: update-core.php
+      - listitem [ref=f42e17]
+      - listitem [ref=f42e19]:
+        - link "Posts" [ref=f42e20] [cursor=pointer]:
+          - /url: edit.php
+          - generic [ref=f42e21]: 
+        - list [ref=f42e23]:
+          - listitem [ref=f42e24]:
+            - link "All Posts" [ref=f42e25] [cursor=pointer]:
+              - /url: edit.php
+          - listitem [ref=f42e26]:
+            - link "Add Post" [ref=f42e27] [cursor=pointer]:
+              - /url: post-new.php
+          - listitem [ref=f42e28]:
+            - link "Categories" [ref=f42e29] [cursor=pointer]:
+              - /url: edit-tags.php?taxonomy=category
+          - listitem [ref=f42e30]:
+            - link "Tags" [ref=f42e31] [cursor=pointer]:
+              - /url: edit-tags.php?taxonomy=post_tag
+      - listitem [ref=f42e32]:
+        - link "Media" [ref=f42e33] [cursor=pointer]:
+          - /url: upload.php
+          - generic [ref=f42e34]: 
+        - list [ref=f42e36]:
+          - listitem [ref=f42e37]:
+            - link "Library" [ref=f42e38] [cursor=pointer]:
+              - /url: upload.php
+          - listitem [ref=f42e39]:
+            - link "Add Media File" [ref=f42e40] [cursor=pointer]:
+              - /url: media-new.php
+      - listitem [ref=f42e41]:
+        - link "Pages" [ref=f42e42] [cursor=pointer]:
+          - /url: edit.php?post_type=page
+          - generic [ref=f42e43]: 
+        - list [ref=f42e45]:
+          - listitem [ref=f42e46]:
+            - link "All Pages" [ref=f42e47] [cursor=pointer]:
+              - /url: edit.php?post_type=page
+          - listitem [ref=f42e48]:
+            - link "Add Page" [ref=f42e49] [cursor=pointer]:
+              - /url: post-new.php?post_type=page
+      - listitem [ref=f42e50]:
+        - link "Comments" [ref=f42e51] [cursor=pointer]:
+          - /url: edit-comments.php
+          - generic [ref=f42e52]: 
+      - listitem [ref=f42e54]:
+        - link "Diagrams" [ref=f42e55] [cursor=pointer]:
+          - /url: admin.php?page=mdm-diagrams
+        - list [ref=f42e58]:
+          - listitem [ref=f42e59]:
+            - link "Diagrams" [ref=f42e60] [cursor=pointer]:
+              - /url: admin.php?page=mdm-diagrams
+          - listitem [ref=f42e61]:
+            - link "Settings" [ref=f42e62] [cursor=pointer]:
+              - /url: admin.php?page=mdm-settings
+      - listitem [ref=f42e63]
+      - listitem [ref=f42e65]:
+        - link "Appearance" [ref=f42e66] [cursor=pointer]:
+          - /url: themes.php
+          - generic [ref=f42e67]: 
+        - list [ref=f42e69]:
+          - listitem [ref=f42e70]:
+            - link "Themes" [ref=f42e71] [cursor=pointer]:
+              - /url: themes.php
+          - listitem [ref=f42e72]:
+            - link "Editor" [ref=f42e73] [cursor=pointer]:
+              - /url: site-editor.php
+          - listitem [ref=f42e74]:
+            - link "Fonts" [ref=f42e75] [cursor=pointer]:
+              - /url: font-library.php
+      - listitem [ref=f42e76]:
+        - link "Plugins" [ref=f42e77] [cursor=pointer]:
+          - /url: plugins.php
+          - generic [ref=f42e78]: 
+        - list [ref=f42e80]:
+          - listitem [ref=f42e81]:
+            - link "Installed Plugins" [ref=f42e82] [cursor=pointer]:
+              - /url: plugins.php
+          - listitem [ref=f42e83]:
+            - link "Add Plugin" [ref=f42e84] [cursor=pointer]:
+              - /url: plugin-install.php
+      - listitem [ref=f42e85]:
+        - link "Users" [ref=f42e86] [cursor=pointer]:
+          - /url: users.php
+          - generic [ref=f42e87]: 
+        - list [ref=f42e89]:
+          - listitem [ref=f42e90]:
+            - link "All Users" [ref=f42e91] [cursor=pointer]:
+              - /url: users.php
+          - listitem [ref=f42e92]:
+            - link "Add User" [ref=f42e93] [cursor=pointer]:
+              - /url: user-new.php
+          - listitem [ref=f42e94]:
+            - link "Profile" [ref=f42e95] [cursor=pointer]:
+              - /url: profile.php
+      - listitem [ref=f42e96]:
+        - link "Tools" [ref=f42e97] [cursor=pointer]:
+          - /url: tools.php
+          - generic [ref=f42e98]: 
+        - list [ref=f42e100]:
+          - listitem [ref=f42e101]:
+            - link "Available Tools" [ref=f42e102] [cursor=pointer]:
+              - /url: tools.php
+          - listitem [ref=f42e103]:
+            - link "Import" [ref=f42e104] [cursor=pointer]:
+              - /url: import.php
+          - listitem [ref=f42e105]:
+            - link "Export" [ref=f42e106] [cursor=pointer]:
+              - /url: export.php
+          - listitem [ref=f42e107]:
+            - link "Site Health" [ref=f42e108] [cursor=pointer]:
+              - /url: site-health.php
+          - listitem [ref=f42e109]:
+            - link "Export Personal Data" [ref=f42e110] [cursor=pointer]:
+              - /url: export-personal-data.php
+          - listitem [ref=f42e111]:
+            - link "Erase Personal Data" [ref=f42e112] [cursor=pointer]:
+              - /url: erase-personal-data.php
+          - listitem [ref=f42e113]:
+            - link "Theme File Editor" [ref=f42e114] [cursor=pointer]:
+              - /url: theme-editor.php
+          - listitem [ref=f42e115]:
+            - link "Plugin File Editor" [ref=f42e116] [cursor=pointer]:
+              - /url: plugin-editor.php
+      - listitem [ref=f42e117]:
+        - link "Settings" [ref=f42e118] [cursor=pointer]:
+          - /url: options-general.php
+          - generic [ref=f42e119]: 
+        - list [ref=f42e121]:
+          - listitem [ref=f42e122]:
+            - link "General" [ref=f42e123] [cursor=pointer]:
+              - /url: options-general.php
+          - listitem [ref=f42e124]:
+            - link "Connectors" [ref=f42e125] [cursor=pointer]:
+              - /url: options-connectors.php
+          - listitem [ref=f42e126]:
+            - link "Writing" [ref=f42e127] [cursor=pointer]:
+              - /url: options-writing.php
+          - listitem [ref=f42e128]:
+            - link "Reading" [ref=f42e129] [cursor=pointer]:
+              - /url: options-reading.php
+          - listitem [ref=f42e130]:
+            - link "Discussion" [ref=f42e131] [cursor=pointer]:
+              - /url: options-discussion.php
+          - listitem [ref=f42e132]:
+            - link "Media" [ref=f42e133] [cursor=pointer]:
+              - /url: options-media.php
+          - listitem [ref=f42e134]:
+            - link "Permalinks" [ref=f42e135] [cursor=pointer]:
+              - /url: options-permalink.php
+          - listitem [ref=f42e136]:
+            - link "Privacy" [ref=f42e137] [cursor=pointer]:
+              - /url: options-privacy.php
+      - listitem [ref=f42e138]:
+        - link "SCF" [ref=f42e139] [cursor=pointer]:
+          - /url: edit.php?post_type=acf-field-group
+          - generic [ref=f42e140]: 
+        - list [ref=f42e142]:
+          - listitem [ref=f42e143]:
+            - link "Field Groups" [ref=f42e144] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-field-group
+          - listitem [ref=f42e145]:
+            - link "Post Types" [ref=f42e146] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-post-type
+          - listitem [ref=f42e147]:
+            - link "Taxonomies" [ref=f42e148] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-taxonomy
+          - listitem [ref=f42e149]:
+            - link "Options Pages" [ref=f42e150] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-ui-options-page
+          - listitem [ref=f42e151]:
+            - link "Tools" [ref=f42e152] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-field-group&page=acf-tools
+          - listitem [ref=f42e153]:
+            - link "Beta Features" [ref=f42e154] [cursor=pointer]:
+              - /url: edit.php?post_type=acf-field-group&page=scf-beta-features
+      - listitem [ref=f42e155]:
+        - button "Collapse Main menu" [expanded] [ref=f42e156] [cursor=pointer]:
+          - generic [ref=f42e158]: Collapse Menu
+  - generic [ref=f42e159]:
+    - generic [ref=f42e160]:
+      - navigation "Toolbar":
+        - menu:
+          - group [ref=f42e161]:
+            - menuitem "About WordPress" [ref=f42e162] [cursor=pointer]
+          - group [ref=f42e165]:
+            - menuitem "Mermaid Diagrams Development" [ref=f42e166] [cursor=pointer]
+          - group [ref=f42e167]:
+            - menuitem "Ctrl+K Open command palette" [ref=f42e168] [cursor=pointer]:
+              - generic [ref=f42e170]:
+                - text: Ctrl+K
+                - generic [ref=f42e171]: Open command palette
+          - group [ref=f42e172]:
+            - menuitem "0 Comments in moderation" [ref=f42e173] [cursor=pointer]:
+              - generic [ref=f42e175]: "0"
+          - group [ref=f42e177]:
+            - menuitem "New" [ref=f42e178] [cursor=pointer]
+        - menu [ref=f42e181]:
+          - group [ref=f42e182]:
+            - menuitem "Howdy, admin" [ref=f42e183] [cursor=pointer]
+    - main [ref=f42e184]:
+      - generic [ref=f42e188]:
+        - generic [ref=f42e189]:
+          - generic [ref=f42e190]:
+            - heading "Diagrams" [level=1] [ref=f42e191]
+            - paragraph [ref=f42e192]: A list of all Diagrams on the system.
+          - button "Add diagram" [ref=f42e193] [cursor=pointer]
+        - generic [ref=f42e195]:
+          - generic [ref=f42e196]:
+            - generic [ref=f42e199]:
+              - generic [ref=f42e200]: Search diagrams
+              - searchbox "Search diagrams" [ref=f42e206]
+            - button "Add filter" [ref=f42e208] [cursor=pointer]
+          - generic [ref=f42e211]:
+            - button "Layout" [ref=f42e212] [cursor=pointer]
+            - button "View options" [ref=f42e217] [cursor=pointer]
+  - contentinfo [ref=f42e220]:
+    - paragraph [ref=f42e221]:
+      - generic [ref=f42e222]:
+        - text: Thank you for creating with
+        - link "WordPress" [ref=f42e223] [cursor=pointer]:
+          - /url: https://wordpress.org/
+        - text: .
+    - paragraph [ref=f42e224]: Version 7.0.2

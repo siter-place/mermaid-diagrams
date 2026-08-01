@@ -10,10 +10,11 @@ test.describe('Diagram library preview accessibility', () => {
 
     await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
     await expect(
-      page.getByTestId('mdm-diagram-table').getByRole('row', { name: new RegExp(title) })
+      page.getByRole('row', { name: new RegExp(title) })
     ).toBeVisible({ timeout: 15000 });
 
-    await page.getByRole('button', { name: new RegExp(`preview ${title}`, 'i') }).click();
+    const row = page.getByRole('row', { name: new RegExp(title) });
+    await row.getByRole('button', { name: /preview/i }).click();
     await expect(page.getByTestId('mdm-preview-panel')).toBeVisible();
 
     await page.keyboard.press('Tab');

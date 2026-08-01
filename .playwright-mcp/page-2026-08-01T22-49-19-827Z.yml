@@ -1,0 +1,71 @@
+- generic [ref=f20e1]:
+  - generic [ref=f20e2]:
+    - text:           
+    - generic:
+      - main:
+        - generic [ref=f20e5]:
+          - region "Navigation" [ref=f20e6]:
+            - generic [ref=f20e7]:
+              - generic [ref=f20e9]:
+                - link "Go to the Dashboard" [ref=f20e11] [cursor=pointer]:
+                  - /url: http://localhost:8888/wp-admin/
+                - generic [ref=f20e15]:
+                  - link "Mermaid Diagrams Development (opens in a new tab) ↗" [ref=f20e17] [cursor=pointer]:
+                    - /url: http://localhost:8888
+                    - text: Mermaid Diagrams Development
+                    - generic [ref=f20e18]: (opens in a new tab)
+                    - text: ↗
+                  - button "Open command palette" [ref=f20e20] [cursor=pointer]
+              - generic [ref=f20e25]:
+                - generic [ref=f20e26]:
+                  - button "Back" [ref=f20e27] [cursor=pointer]
+                  - heading "Patterns" [level=1] [ref=f20e30]
+                - generic [ref=f20e31]:
+                  - generic [ref=f20e32]: Manage what patterns are available when editing the site.
+                  - list [ref=f20e33]:
+                    - listitem [ref=f20e34]:
+                      - button "All template parts 7" [ref=f20e35] [cursor=pointer]:
+                        - generic [ref=f20e36]:
+                          - generic [ref=f20e39]: All template parts
+                          - generic [ref=f20e40]: "7"
+                    - listitem [ref=f20e41]:
+                      - button "Header 3" [ref=f20e42] [cursor=pointer]:
+                        - generic [ref=f20e43]:
+                          - generic [ref=f20e46]: Header
+                          - generic [ref=f20e47]: "3"
+                    - listitem [ref=f20e48]:
+                      - button "Footer 3" [ref=f20e49] [cursor=pointer]:
+                        - generic [ref=f20e50]:
+                          - generic [ref=f20e53]: Footer
+                          - generic [ref=f20e54]: "3"
+                    - listitem [ref=f20e55]:
+                      - button "General 1" [ref=f20e56] [cursor=pointer]:
+                        - generic [ref=f20e57]:
+                          - generic [ref=f20e60]: General
+                          - generic [ref=f20e61]: "1"
+              - button "Saved" [disabled] [ref=f20e64]
+          - region "All patterns" [ref=f20e68]:
+            - generic [ref=f20e69]:
+              - generic [ref=f20e70]:
+                - heading "All patterns" [level=2] [ref=f20e72]
+                - button "Add Pattern" [ref=f20e75] [cursor=pointer]
+              - paragraph [ref=f20e76]: A list of all patterns from all sources.
+            - generic [ref=f20e77]:
+              - generic [ref=f20e78]:
+                - generic [ref=f20e79]:
+                  - generic [ref=f20e82]:
+                    - generic [ref=f20e83]: Search
+                    - searchbox "Search" [ref=f20e89]
+                  - button "Filter" [disabled] [expanded] [active] [pressed] [ref=f20e91]
+                - generic [ref=f20e94]:
+                  - button "Layout" [ref=f20e95] [cursor=pointer]
+                  - button "View options" [ref=f20e100] [cursor=pointer]
+              - generic [ref=f20e103]:
+                - button "Sync status" [ref=f20e106] [cursor=pointer]
+                - button "Reset" [disabled] [ref=f20e107]
+              - paragraph [ref=f20e109]: No results
+  - text: 
+  - tooltip "Filter" [ref=f20e113]
+  - text:          
+  - status [ref=f20e114]
+  - text:  

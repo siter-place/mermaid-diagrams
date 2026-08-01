@@ -112,6 +112,16 @@ class AdminAssets {
 			);
 		}
 
+		$dataviews_css = $plugin_dir . 'build/vendor/dataviews.css';
+		if ( file_exists( $dataviews_css ) && $screen === 'library' ) {
+			wp_enqueue_style(
+				'mdm-dataviews',
+				$plugin_url . 'build/vendor/dataviews.css',
+				array( 'wp-components' ),
+				$version
+			);
+		}
+
 		$bootstrap = wp_json_encode( ScreenBootstrapData::for_screen( $screen ) );
 		if ( false === $bootstrap ) {
 			return;

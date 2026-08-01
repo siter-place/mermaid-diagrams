@@ -7,6 +7,7 @@ test.describe('Diagram library workflows', () => {
     const uniqueTitle = `E2E Flow ${Date.now()}`;
 
     await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
+    await expect(page.getByTestId('mdm-library-shell')).toBeVisible({ timeout: 10000 });
     await page.getByRole('button', { name: /add diagram/i }).click();
 
     await page.getByLabel(/title/i).fill(uniqueTitle);
@@ -17,19 +18,23 @@ test.describe('Diagram library workflows', () => {
     await expect(page.getByTestId('mdm-notices')).toContainText(/saved/i, { timeout: 15000 });
 
     await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
-    await page.locator('.mdm-filter-bar__search input').fill(uniqueTitle);
+    await page.getByRole('searchbox').fill(uniqueTitle);
     await expect(
-      page.getByTestId('mdm-diagram-table').getByRole('row', { name: new RegExp(uniqueTitle) })
+      page.getByRole('row', { name: new RegExp(uniqueTitle) })
     ).toBeVisible({ timeout: 15000 });
 
-    await page.getByRole('button', { name: new RegExp(`preview ${uniqueTitle}`, 'i') }).click();
+    // Preview via the actions menu
+    const row = page.getByRole('row', { name: new RegExp(uniqueTitle) });
+    await row.getByRole('button', { name: /preview/i }).click();
     await expect(page.getByTestId('mdm-preview-panel')).toBeVisible();
     await page
       .getByTestId('mdm-preview-panel')
       .getByRole('button', { name: /^close$/i })
       .click();
 
-    await page.getByRole('button', { name: new RegExp(`trash ${uniqueTitle}`, 'i') }).click();
+    // Trash via the "Actions" dropdown
+    await row.getByRole('button', { name: /actions/i }).click();
+    await page.getByRole('menuitem', { name: /trash/i }).click();
     await page.getByRole('button', { name: /confirm/i }).click();
     await expect(page.getByTestId('mdm-notices')).toContainText(/moved to trash/i, {
       timeout: 15000,

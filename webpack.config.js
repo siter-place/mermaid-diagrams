@@ -1,5 +1,6 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const plugins = defaultConfig.plugins.map( ( plugin ) => {
   if (
@@ -8,8 +9,6 @@ const plugins = defaultConfig.plugins.map( ( plugin ) => {
     plugin.constructor.name === 'DependencyExtractionWebpackPlugin'
   ) {
     const DependencyExtractionWebpackPlugin = plugin.constructor;
-    const defaultRequestToExternal =
-      DependencyExtractionWebpackPlugin.defaultRequestToExternal;
 
     return new DependencyExtractionWebpackPlugin( {
       ...plugin.options,
@@ -22,6 +21,9 @@ const plugins = defaultConfig.plugins.map( ( plugin ) => {
         ) {
           return null;
         }
+        if ( request.endsWith( '.css' ) ) {
+          return null;
+        }
         return undefined;
       },
     } );
@@ -31,7 +33,17 @@ const plugins = defaultConfig.plugins.map( ( plugin ) => {
 
 module.exports = {
   ...defaultConfig,
-  plugins,
+  plugins: [
+    ...plugins,
+    new CopyPlugin( {
+      patterns: [
+        {
+          from: path.resolve( __dirname, 'node_modules/@wordpress/dataviews/build-style/style.css' ),
+          to: path.resolve( __dirname, 'build/vendor/dataviews.css' ),
+        },
+      ],
+    } ),
+  ],
   entry: {
     ...defaultConfig.entry(),
     'admin/library/index': './assets/src/apps/diagram-library/index.tsx',
