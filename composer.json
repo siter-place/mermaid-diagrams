@@ -8,19 +8,26 @@
   },
   "autoload": {
     "psr-4": {
-      "WebFalcon\\\\MermaidDiagrams\\\\": "src/"
+      "WebFalcon\\MermaidDiagrams\\": "src/"
     }
   },
-  "require-dev": {},
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+    "phpstan/phpstan": "^2.1.0",
+    "phpunit/phpunit": "^11.5.0",
+    "szepeviktor/phpstan-wordpress": "^2.0.0",
+    "wp-coding-standards/wpcs": "^3.1.0",
+    "yoast/phpunit-polyfills": "^3.0.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
   "scripts": {
-    "lint": [
-      "@php -r \"echo 'Pin PHPCS/WPCS in Phase 00.' . PHP_EOL;\""
-    ],
-    "test": [
-      "@php -r \"echo 'Configure PHPUnit in Phase 00.' . PHP_EOL;\""
-    ],
-    "analyse": [
-      "@php -r \"echo 'Configure PHPStan in Phase 00.' . PHP_EOL;\""
-    ]
+    "lint": "vendor/bin/phpcs",
+    "lint:fix": "vendor/bin/phpcbf",
+    "test": "vendor/bin/phpunit",
+    "analyse": "vendor/bin/phpstan analyse"
   }
 }

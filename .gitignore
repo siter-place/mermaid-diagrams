@@ -16,3 +16,6 @@ bruno/reports/
 .DS_Store
 .codex
 .agents
+.phpunit.cache
+tests/e2e/playwright/__screenshots__/*
+bruno/reports/*

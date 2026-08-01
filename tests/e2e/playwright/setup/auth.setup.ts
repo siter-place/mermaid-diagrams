@@ -9,7 +9,7 @@ setup('authenticate WordPress administrator', async ({ page }) => {
   await page.getByLabel(/username|email address/i).fill(
     process.env.WP_ADMIN_USER ?? 'admin'
   );
-  await page.getByLabel(/password/i).fill(
+  await page.locator('#user_pass').fill(
     process.env.WP_ADMIN_PASSWORD ?? 'password'
   );
   await page.getByRole('button', { name: /log in/i }).click();

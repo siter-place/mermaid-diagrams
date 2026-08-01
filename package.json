@@ -14,27 +14,32 @@
     "env:reset": "wp-env reset all",
     "env:logs": "wp-env logs",
     "env:cli": "wp-env run cli bash",
-    "build": "echo 'Implemented in Phase 00/01'",
-    "start": "echo 'Implemented in Phase 00/01'",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:md",
-    "lint:js": "echo 'Configure WordPress scripts in Phase 00'",
-    "lint:css": "echo 'Configure WordPress scripts in Phase 00'",
-    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
+    "lint:js": "wp-scripts lint-js assets/src",
+    "lint:css": "wp-scripts lint-style 'assets/src/**/*.css'",
+    "lint:md": "markdownlint-cli2 'docs/**/*.md' 'README.md' 'AGENTS.md'",
     "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "echo 'Configure Vitest/Jest in Phase 00'",
+    "test:unit": "export NODE_OPTIONS='--experimental-vm-modules' && wp-scripts test-unit-js --config=jest.config.js",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:update": "playwright test --update-snapshots",
-    "test:rest": "bru run bruno --env Local --reporter-json bruno/reports/results.json --reporter-junit bruno/reports/results.xml",
-    "test:rest:html": "bru run bruno --env Local --reporter-html bruno/reports/html",
+    "test:rest": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local && cd ../bruno && bru run '01 Auth' --env Local",
+    "test:rest:html": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local --reporter-html reports/smoke.html",
     "wp:setup": "node tools/wp-env/after-start.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "latest",
-    "@wordpress/env": "latest",
-    "@wordpress/scripts": "latest",
-    "@usebruno/cli": "latest",
-    "markdownlint-cli2": "latest",
-    "typescript": "latest"
+    "@playwright/test": "1.62.1",
+    "@usebruno/cli": "4.0.0",
+    "@wordpress/env": "11.12.0",
+    "@wordpress/scripts": "34.0.0",
+    "markdownlint-cli2": "0.23.2",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@wordpress/components": "30.0.0",
+    "@wordpress/element": "6.0.0",
+    "mermaid": "11.4.1"
   }
 }

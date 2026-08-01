@@ -1,6 +1,6 @@
 # Target Command Catalog
 
-These commands become executable as their phases land.
+These commands are verified and executable as Phase 00 lands.
 
 ```bash
 # Environment
@@ -8,6 +8,7 @@ npm run env:start
 npm run env:stop
 npm run env:reset
 npm run env:logs
+npm run wp:setup
 
 # Build
 npm run start
@@ -15,23 +16,28 @@ npm run build
 
 # Static quality
 npm run lint
+npm run lint:js
+npm run lint:css
+npm run lint:md
 composer lint
+composer lint:fix
 composer analyse
 
 # Unit/integration
 npm run test:unit
 composer test
+npx wp-env run cli --env-cwd=wp-content/plugins/mermaid-diagrams vendor/bin/phpunit
 
-# REST
+# REST (Bruno)
 npm run test:rest
 npm run test:rest:html
 
-# Browser
+# Browser (Playwright)
 npm run test:e2e
 npm run test:e2e:ui
 npm run test:e2e:update
 
-# WordPress operations
+# WordPress CLI operations (Phase 01+)
 npx wp-env run cli wp mdm usage reindex --all
 npx wp-env run cli wp mdm validate --all
 ```

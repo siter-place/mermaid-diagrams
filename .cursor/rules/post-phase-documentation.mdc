@@ -1,0 +1,67 @@
+---
+description: After a plan phase is finalized, update decisions log, changelog, and affected docs
+alwaysApply: true
+---
+
+# Post-Phase Documentation Closeout
+
+Run this checklist **only after** the active plan phase is fully implemented: required code is done, tests and acceptance checks pass, evidence is captured, and the phase is ready to hand off. Do **not** run mid-implementation or while work is still in progress.
+
+## When to trigger
+
+- The current `docs/plans/<phase>/` step is implemented and finalized.
+- The user indicates the phase is complete, or all items in `tests-and-acceptance.md` are satisfied.
+- Run as the **last step** of the session — after code, tests, and the completion report.
+
+## 1. Analyze session context
+
+From the conversation and change set, extract:
+
+- New or changed product/architecture decisions
+- Spike outcomes that resolved open questions
+- Deviations from the phase spec (with rationale)
+- Stable contracts, APIs, commands, fixtures, feature flags, and known limitations
+- Docs listed under the phase README **Documentation output** section
+
+## 2. Update `docs/decisions-log.md`
+
+Append a dated entry:
+
+- Phase ID and title (e.g. `Phase 01 — Plugin Kernel`)
+- Decisions made or confirmed
+- Spike resolutions
+- Explicit deferrals with target phase
+- References to new or updated ADRs
+
+If a decision changes authoritative product behavior, also update `docs/00-product-charter-and-decisions.md` and add or amend an ADR under `docs/architecture/adr/`.
+
+## 3. Update `docs/CHANGELOG.md`
+
+Add under `[Unreleased]` (or a dated section when releasing):
+
+- Phase number and name
+- User-visible and developer-facing changes
+- Breaking changes, migrations, and new commands
+- Paths to test/evidence artifacts (not binary blobs)
+
+## 4. Update other documentation as needed
+
+Update only what the session actually changed:
+
+| Trigger | Target |
+|---|---|
+| Resolved or new open spike | `docs/11-open-decisions.md` |
+| API/schema/contract change | `docs/03-data-model-rest-api.md`, Bruno/OpenAPI notes |
+| Architecture boundary change | Relevant spec under `docs/02-enterprise-architecture.md`, integration guides |
+| New ADR-worthy choice | `docs/architecture/adr/ADR-NNN-*.md` |
+| Pinned version/license change | Source lock and integration docs cited by the phase |
+| Handoff differs from plan | Phase folder README or technical-spec |
+
+When any doc conflicts with `docs/00-product-charter-and-decisions.md`, fix the doc in the same change set.
+
+## 5. Manifest and closeout
+
+- If files were added, removed, or renamed under `docs/`, update `docs/MANIFEST.md` when maintained.
+- End with a closeout summary: phase complete (yes/no), docs updated (list paths), remaining risks for the next phase.
+
+Do not commit unless the user asks. Do not edit unrelated documentation.
