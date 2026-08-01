@@ -1,0 +1,26 @@
+{
+  "name": "webfalcon/mermaid-diagrams",
+  "description": "Reusable Mermaid diagrams for WordPress.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebFalcon\\\\MermaidDiagrams\\\\": "src/"
+    }
+  },
+  "require-dev": {},
+  "scripts": {
+    "lint": [
+      "@php -r \"echo 'Pin PHPCS/WPCS in Phase 00.' . PHP_EOL;\""
+    ],
+    "test": [
+      "@php -r \"echo 'Configure PHPUnit in Phase 00.' . PHP_EOL;\""
+    ],
+    "analyse": [
+      "@php -r \"echo 'Configure PHPStan in Phase 00.' . PHP_EOL;\""
+    ]
+  }
+}

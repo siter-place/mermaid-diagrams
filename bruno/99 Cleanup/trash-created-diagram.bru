@@ -1,0 +1,15 @@
+meta {
+  name: Trash created diagram
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{apiRoot}}/diagrams/{{diagramId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: in [200, 204, 404]
+}

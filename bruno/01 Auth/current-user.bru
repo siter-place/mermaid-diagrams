@@ -1,0 +1,16 @@
+meta {
+  name: Authenticated current user
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/wp-json/wp/v2/users/me?context=edit
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: isNumber
+}

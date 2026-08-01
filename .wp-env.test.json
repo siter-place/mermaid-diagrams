@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/wp-env.json",
+  "core": "WordPress/wordpress-develop#trunk",
+  "phpVersion": "8.3",
+  "plugins": [
+    "."
+  ],
+  "port": 8889,
+  "config": {
+    "WP_DEBUG": true,
+    "SCRIPT_DEBUG": true,
+    "WP_ENVIRONMENT_TYPE": "local",
+    "WP_DEVELOPMENT_MODE": "plugin"
+  }
+}

@@ -1,0 +1,16 @@
+meta {
+  name: List diagrams
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{apiRoot}}/diagrams?page=1&per_page=20&orderby=modified&order=desc
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.items: isArray
+}

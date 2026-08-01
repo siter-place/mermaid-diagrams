@@ -1,0 +1,23 @@
+meta {
+  name: Reject missing validation receipt
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{apiRoot}}/diagrams
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Must fail",
+    "source": "flowchart LR\n  A -->",
+    "status": "draft"
+  }
+}
+
+assert {
+  res.status: in [400, 422]
+}

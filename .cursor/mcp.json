@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "/home/black/.nvm/versions/node/v24.18.1/bin/playwright-mcp",
+      "args": ["--browser=chrome", "--isolated"]
+    }
+  }
+}

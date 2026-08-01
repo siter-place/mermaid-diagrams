@@ -1,0 +1,25 @@
+meta {
+  name: Regenerate controlled SVG thumbnail contract
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{apiRoot}}/diagrams/{{diagramId}}/thumbnail:regenerate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "svg": "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50"><text x="5" y="25">A → B</text></svg>",
+    "sourceHash": "{{validSourceHash}}",
+    "width": 100,
+    "height": 50,
+    "expectedVersion": "{{diagramVersion}}"
+  }
+}
+
+assert {
+  res.status: in [200, 201]
+}

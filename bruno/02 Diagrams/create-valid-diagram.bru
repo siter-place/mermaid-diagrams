@@ -1,0 +1,43 @@
+meta {
+  name: Create valid diagram
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{apiRoot}}/diagrams
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Idempotency-Key: bruno-{{$guid}}
+}
+
+body:json {
+  {
+    "title": "Bruno Flow {{$timestamp}}",
+    "source": "flowchart LR\n  A --> B",
+    "status": "draft",
+    "validation": {
+      "sourceHash": "{{validSourceHash}}",
+      "mermaidVersion": "{{mermaidVersion}}",
+      "diagramType": "flowchart-v2",
+      "validatedAt": "{{$isoTimestamp}}",
+      "profile": "worker"
+    }
+  }
+}
+
+assert {
+  res.status: in [200, 201]
+  res.body.id: isNumber
+}
+
+script:post-response {
+  if (res.body && res.body.id) {
+    bru.setVar("diagramId", res.body.id);
+    bru.setVar("diagramVersion", res.body.versionToken);
+  }
+}

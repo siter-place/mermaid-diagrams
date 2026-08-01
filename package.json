@@ -1,0 +1,40 @@
+{
+  "name": "mermaid-diagrams",
+  "version": "0.0.0-development",
+  "private": true,
+  "engines": {
+    "node": ">=24.16.0",
+    "npm": ">=11"
+  },
+  "scripts": {
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "env:destroy": "wp-env destroy",
+    "env:clean": "wp-env clean all",
+    "env:reset": "wp-env reset all",
+    "env:logs": "wp-env logs",
+    "env:cli": "wp-env run cli bash",
+    "build": "echo 'Implemented in Phase 00/01'",
+    "start": "echo 'Implemented in Phase 00/01'",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:md",
+    "lint:js": "echo 'Configure WordPress scripts in Phase 00'",
+    "lint:css": "echo 'Configure WordPress scripts in Phase 00'",
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "echo 'Configure Vitest/Jest in Phase 00'",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "test:rest": "bru run bruno --env Local --reporter-json bruno/reports/results.json --reporter-junit bruno/reports/results.xml",
+    "test:rest:html": "bru run bruno --env Local --reporter-html bruno/reports/html",
+    "wp:setup": "node tools/wp-env/after-start.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@wordpress/env": "latest",
+    "@wordpress/scripts": "latest",
+    "@usebruno/cli": "latest",
+    "markdownlint-cli2": "latest",
+    "typescript": "latest"
+  }
+}

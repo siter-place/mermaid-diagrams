@@ -1,0 +1,15 @@
+meta {
+  name: Discover Mermaid Diagrams abilities
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/wp-json/wp-abilities/v1/abilities?category=mdm
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+}

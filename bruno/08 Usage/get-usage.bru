@@ -1,0 +1,16 @@
+meta {
+  name: Get diagram usage
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{apiRoot}}/diagrams/{{diagramId}}/usage
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.count: isNumber
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Bulk add tags
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{apiRoot}}/diagrams/bulk
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "ids": [{{diagramId}}],
+    "action": "add_tags",
+    "termIds": [{{tagId}}]
+  }
+}
+
+assert {
+  res.status: in [200, 207]
+}
