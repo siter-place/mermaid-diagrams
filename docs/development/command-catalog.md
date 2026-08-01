@@ -1,6 +1,6 @@
 # Target Command Catalog
 
-These commands are verified and executable as Phase 00 lands.
+These commands are verified and executable as Phase 01 lands.
 
 ```bash
 # Environment
@@ -38,8 +38,10 @@ npm run test:e2e:ui
 npm run test:e2e:update
 
 # WordPress CLI operations (Phase 01+)
-npx wp-env run cli wp mdm usage reindex --all
-npx wp-env run cli wp mdm validate --all
+npx wp-env run cli wp mdm status
+npx wp-env run cli wp mdm capabilities repair
+npx wp-env run cli wp mdm usage reindex (stub — Phase 09)
+npx wp-env run cli wp mdm validate (stub — Phase 03)
 ```
 
 No phase may silently change command meaning. Update this catalog and CI together.

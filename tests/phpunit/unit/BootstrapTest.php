@@ -8,8 +8,12 @@
 namespace WebFalcon\MermaidDiagrams\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use WebFalcon\MermaidDiagrams\Bootstrap\Compatibility;
+use WebFalcon\MermaidDiagrams\Bootstrap\Container;
 use WebFalcon\MermaidDiagrams\Bootstrap\Plugin;
+use WebFalcon\MermaidDiagrams\Bootstrap\ServiceProvider;
+use WebFalcon\MermaidDiagrams\Bootstrap\ServiceProviderRegistry;
 
 /**
  * Class BootstrapTest
@@ -34,7 +38,7 @@ class BootstrapTest extends TestCase {
 	 * Test plugin version constant.
 	 */
 	public function test_plugin_version(): void {
-		$this->assertSame( '0.0.0-development', Plugin::VERSION );
+		$this->assertSame( '1.0.0', Plugin::VERSION );
 	}
 
 	/**
@@ -51,5 +55,80 @@ class BootstrapTest extends TestCase {
 		$plugin = Plugin::instance();
 		$this->assertInstanceOf( Plugin::class, $plugin );
 		$this->assertSame( $plugin, Plugin::instance() );
+	}
+
+	/**
+	 * Test container bind, instance, get, and has methods.
+	 */
+	public function test_container_bindings(): void {
+		$container = new Container();
+
+		$this->assertFalse( $container->has( 'service.test' ) );
+
+		$container->bind(
+			'service.test',
+			function () {
+				return new \stdClass();
+			}
+		);
+
+		$this->assertTrue( $container->has( 'service.test' ) );
+
+		$instance1 = $container->get( 'service.test' );
+		$instance2 = $container->get( 'service.test' );
+
+		$this->assertInstanceOf( \stdClass::class, $instance1 );
+		$this->assertSame( $instance1, $instance2 );
+
+		$directInstance = new \stdClass();
+		$container->instance( 'service.direct', $directInstance );
+
+		$this->assertTrue( $container->has( 'service.direct' ) );
+		$this->assertSame( $directInstance, $container->get( 'service.direct' ) );
+	}
+
+	/**
+	 * Test container throws exception for missing service.
+	 */
+	public function test_container_throws_for_unbound_service(): void {
+		$container = new Container();
+		$this->expectException( RuntimeException::class );
+		$container->get( 'missing.service' );
+	}
+
+	/**
+	 * Test service provider registry lifecycle.
+	 */
+	public function test_service_provider_registry(): void {
+		$container = new Container();
+		$registry  = new ServiceProviderRegistry( $container );
+
+		$registered = false;
+		$booted     = false;
+
+		$provider = new class( $registered, $booted ) implements ServiceProvider {
+			public function __construct( private bool &$registeredRef, private bool &$bootedRef ) {}
+
+			public function register( Container $container ): void {
+				$this->registeredRef = true;
+				$container->instance( 'provider.test', 'value' );
+			}
+
+			public function boot(): void {
+				$this->bootedRef = true;
+			}
+		};
+
+		$registry->add_provider( $provider );
+		$this->assertFalse( $registered );
+		$this->assertFalse( $booted );
+
+		$registry->register_all();
+		$this->assertTrue( $registered );
+		$this->assertTrue( $container->has( 'provider.test' ) );
+		$this->assertFalse( $booted );
+
+		$registry->boot_all();
+		$this->assertTrue( $booted );
 	}
 }

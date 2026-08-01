@@ -40,3 +40,15 @@
 ## Exit rule
 
 Do not mark this phase complete while a required test is skipped without an approved, dated reason and target phase.
+
+
+## Version synchronization acceptance
+
+- [ ] `npm run test:versioning` passes.
+- [ ] Dry run lists the expected files without modifying the working tree.
+- [ ] Root npm and Composer project versions update while dependency versions remain untouched.
+- [ ] WordPress plugin header, `MDM_VERSION`, and `readme.txt` Stable tag match the release.
+- [ ] `CHANGELOG.md` contains the dated release and retains earlier release history.
+- [ ] `docs/decision-log.md` contains `REL-<version>` with previous/new version and date.
+- [ ] Same-version, malformed-version, duplicate-release, and downgrade attempts fail safely.
+- [ ] Release evidence includes a reviewed `git diff`.

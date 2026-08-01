@@ -2,33 +2,33 @@
 
 ## PHP unit/integration
 
-- [ ] Plugin header/bootstrap syntax and activation smoke only.
-- [ ] No production domain behavior is expected yet.
+- [x] Plugin header/bootstrap syntax and activation smoke only.
+- [x] No production domain behavior is expected yet.
 
 ## JavaScript/Svelte unit tests
 
-- [ ] Toolchain smoke build.
-- [ ] Mermaid browser parse/render spike.
-- [ ] Node validation-worker parse spike using same version.
+- [x] Toolchain smoke build.
+- [x] Mermaid browser parse/render spike.
+- [x] Node validation-worker parse spike using same version.
 
 ## Bruno REST tests
 
-- [ ] GET WordPress REST index or plugin temporary health route.
-- [ ] Authenticated current-user request with Application Password.
+- [x] GET WordPress REST index or plugin temporary health route.
+- [x] Authenticated current-user request with Application Password.
 
 ## Playwright and visual tests
 
-- [ ] Login setup and storage state.
-- [ ] Open wp-admin and verify WordPress version/plugin page.
-- [ ] One deterministic baseline image proving WSL2 visual setup.
+- [x] Login setup and storage state.
+- [x] Open wp-admin and verify WordPress version/plugin page.
+- [x] One deterministic baseline image proving WSL2 visual setup.
 
 ## Acceptance outputs
 
-- [ ] `npm install`, `npm run env:start`, Playwright smoke, and Bruno smoke succeed from documented clean steps.
-- [ ] All source versions/licenses and spike results are committed.
-- [ ] No secret is committed.
-- [ ] ADRs select build boundaries and fallback behavior.
-- [ ] Phase 01 can begin without unresolved environment uncertainty.
+- [x] `npm install`, `npm run env:start`, Playwright smoke, and Bruno smoke succeed from documented clean steps.
+- [x] All source versions/licenses and spike results are committed.
+- [x] No secret is committed.
+- [x] ADRs select build boundaries and fallback behavior.
+- [x] Phase 01 can begin without unresolved environment uncertainty.
 
 ## Required evidence
 

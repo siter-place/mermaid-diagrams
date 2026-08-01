@@ -1,51 +1,70 @@
 ---
-description: After a plan phase is finalized, update decisions log, changelog, and affected docs
+description: Post-phase documentation, implementation logging, and automated versioning closeout workflow
 alwaysApply: true
 ---
 
-# Post-Phase Documentation Closeout
+# Post-Phase Documentation & Automated Versioning Closeout
 
 Run this checklist **only after** the active plan phase is fully implemented: required code is done, tests and acceptance checks pass, evidence is captured, and the phase is ready to hand off. Do **not** run mid-implementation or while work is still in progress.
 
-## When to trigger
+---
 
-- The current `docs/plans/<phase>/` step is implemented and finalized.
-- The user indicates the phase is complete, or all items in `tests-and-acceptance.md` are satisfied.
-- Run as the **last step** of the session — after code, tests, and the completion report.
+## AUTOMATED VERSIONING & MANDATORY SKILL TRIGGER
 
-## 1. Analyze session context
+Whenever executing phase closeout, the agent **MUST** automatically handle version increments and load/follow the `versioning` skill (`.cursor/skills/versioning/SKILL.md`).
 
-From the conversation and change set, extract:
+**Version Bump Logic (Agent Automated Calculation):**
+1. Read current version from `package.json` (e.g. `1.0.0`).
+2. Calculate target version according to Semantic Versioning:
+   - **Minor bump** (`1.0.0` → `1.1.0`): Completed standard implementation phase or major feature addition.
+   - **Patch bump** (`1.0.0` → `1.0.1`): Maintenance fixes, refactoring, or incremental iteration within a phase.
+   - **Major bump** (`1.x.x` → `2.0.0`): Breaking architectural shift or major product baseline release.
+3. Automatically update `.env` with:
+   ```dotenv
+   TARGET_VERSION=<calculated-next-version>
+   TARGET_VERSION_DATE=<today-ISO-date-YYYY-MM-DD>
+   TARGET_VERSION_CHANGELOG=<Concise summary of user and developer changes in this phase>
+   TARGET_VERSION_DECISION=<Rationale for phase closeout approval and version release>
+   ```
+4. Execute automated version synchronization tools:
+   ```bash
+   npm run update-version:dry-run
+   npm run update-version
+   npm run test:versioning
+   ```
+   *If `TARGET_VERSION` is already equal to the current version, the script exits cleanly without duplicating log entries.*
 
-- New or changed product/architecture decisions
-- Spike outcomes that resolved open questions
-- Deviations from the phase spec (with rationale)
-- Stable contracts, APIs, commands, fixtures, feature flags, and known limitations
-- Docs listed under the phase README **Documentation output** section
+---
 
-## 2. Update `docs/decisions-log.md`
+## Phase Lifecycle & Implementation Logging
 
-Append a dated entry:
+For **every** plan phase, the agent must manage implementation logs in `docs/implementation-logs/`:
 
-- Phase ID and title (e.g. `Phase 01 — Plugin Kernel`)
-- Decisions made or confirmed
-- Spike resolutions
-- Explicit deferrals with target phase
-- References to new or updated ADRs
+1. **Pre-Implementation Phase Start:**
+   - Create a pre-implementation report file under `docs/implementation-logs/YYYY-MM-DD-phase-XX-<short-name>.md`.
+   - Include a pre-implementation checklist extracted from the phase `technical-spec.md` and `tests-and-acceptance.md`.
 
+2. **Post-Implementation Phase Finalization:**
+   - Complete the implementation report in `docs/implementation-logs/YYYY-MM-DD-phase-XX-<short-name>.md` with:
+     - Pre-implementation checklist status (all items checked).
+     - Version transition details (e.g., `1.0.0` → `1.1.0`).
+     - Key decisions made or confirmed.
+     - Files created and modified.
+     - Verification results, commands run, and test outputs.
+     - Post-implementation comparison table vs initial specification.
+
+---
+
+## Documentation Synchronization Checklist
+
+### 1. Update `docs/decision-log.md`
+`npm run update-version` automatically appends a `REL-VERSION` entry linking the version bump and rationale. If additional phase decisions or ADRs were made, append them under the phase section in `docs/decision-log.md`.
 If a decision changes authoritative product behavior, also update `docs/00-product-charter-and-decisions.md` and add or amend an ADR under `docs/architecture/adr/`.
 
-## 3. Update `docs/CHANGELOG.md`
+### 2. Update `CHANGELOG.md`
+`npm run update-version` automatically promotes `[Unreleased]` items into `## [VERSION] - YYYY-MM-DD`. Ensure all user-visible and developer-facing changes are documented.
 
-Add under `[Unreleased]` (or a dated section when releasing):
-
-- Phase number and name
-- User-visible and developer-facing changes
-- Breaking changes, migrations, and new commands
-- Paths to test/evidence artifacts (not binary blobs)
-
-## 4. Update other documentation as needed
-
+### 3. Update Domain Specifications & Docs
 Update only what the session actually changed:
 
 | Trigger | Target |
@@ -57,11 +76,17 @@ Update only what the session actually changed:
 | Pinned version/license change | Source lock and integration docs cited by the phase |
 | Handoff differs from plan | Phase folder README or technical-spec |
 
-When any doc conflicts with `docs/00-product-charter-and-decisions.md`, fix the doc in the same change set.
+### 4. Update `docs/MANIFEST.md`
+If files were added, removed, or renamed under `docs/`, update `docs/MANIFEST.md`.
 
-## 5. Manifest and closeout
+---
 
-- If files were added, removed, or renamed under `docs/`, update `docs/MANIFEST.md` when maintained.
-- End with a closeout summary: phase complete (yes/no), docs updated (list paths), remaining risks for the next phase.
+## Closeout Summary Output
 
-Do not commit unless the user asks. Do not edit unrelated documentation.
+End the session with a closeout summary containing:
+- Phase completion status (Yes/No)
+- Version increment performed (`1.x.x` → `1.y.y`)
+- Updated documentation paths
+- Link to implementation report in `docs/implementation-logs/`
+- Verification test status (`npm run test:versioning` passed)
+- Remaining risks or notes for the next phase

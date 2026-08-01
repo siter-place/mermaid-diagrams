@@ -19,3 +19,5 @@ bruno/reports/
 .phpunit.cache
 tests/e2e/playwright/__screenshots__/*
 bruno/reports/*
+test-results/*
+test-results/**

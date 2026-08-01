@@ -12,6 +12,7 @@ Deliver one bounded, demonstrable vertical slice without implementing later-phas
 ## Functional specification
 
 - A production ZIP can be built, installed, upgraded, tested, and operated with documented security/accessibility/performance guarantees.
+- One version command synchronizes WordPress/PHP/npm/Composer references and records the same release in both the changelog and decision log.
 - CI enforces static, unit, integration, Bruno, Playwright, visual, ability, dependency, and packaging gates.
 - Users/admins/developers have complete installation, configuration, usage, AI/MCP, troubleshooting, privacy, and uninstall documentation.
 
@@ -23,6 +24,7 @@ Deliver one bounded, demonstrable vertical slice without implementing later-phas
 - `../../03-data-model-rest-api.md`
 - `../../07-security-performance-accessibility.md`
 - `../../09-testing-strategy.md`
+- `../../development/version-management.md`
 - Relevant ADRs under `../../architecture/adr/`
 - Tool notes under `../../reference/tools/`
 
@@ -55,7 +57,8 @@ Deliver one bounded, demonstrable vertical slice without implementing later-phas
 
 ## Documentation output
 
-- Finalize every user/developer/ops/release document, manifest, source lock, licenses, changelog, known limitations, and future roadmap.
+- Finalize every user/developer/ops/release document, manifest, source lock, licenses, changelog, decision log, known limitations, and future roadmap.
+- Demonstrate `npm run update-version:dry-run`, `npm run update-version`, and `npm run test:versioning` as part of release evidence.
 
 ## Handoff to next phase
 

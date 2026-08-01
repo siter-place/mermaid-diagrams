@@ -11,6 +11,9 @@ Implement this phase through the existing modular-monolith layers. Presentation 
 - [ ] Complete WCAG-oriented keyboard/focus/labels/announcements/contrast/RTL/reduced-motion testing.
 - [ ] Finalize PHPCS/WPCS, PHPStan, JS/TS/style/markdown lint, PHPUnit/integration, dependency/license/security scanning, Plugin Check.
 - [ ] Create CI matrix for minimum and forward WordPress profiles; run Bruno reports and Playwright traces/visual comparisons.
+- [ ] Finalize and test `scripts/increase-plugin-version.mjs` on Node.js 24.18.1.
+- [ ] Require release candidates to set `VERSION` in local `.env`, run the dry run, synchronize active version references, update `CHANGELOG.md`, and create the matching `docs/decision-log.md` entry.
+- [ ] Add CI verification that committed plugin headers, constants, package metadata, WordPress `Stable tag`, changelog release, and decision-log release agree.
 - [ ] Create production build/ZIP excluding dev/test/secrets/source maps as policy dictates; verify clean install/upgrade/uninstall.
 - [ ] Create WordPress Playground Blueprint/demo when compatible, without secrets.
 - [ ] Finalize readme/changelog/upgrade notes, admin/user/developer REST/Ability docs, cron/WP-CLI ops, privacy and support runbooks.

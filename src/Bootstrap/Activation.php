@@ -7,6 +7,11 @@
 
 namespace WebFalcon\MermaidDiagrams\Bootstrap;
 
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramCapabilities;
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramMeta;
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramPostType;
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramTaxonomies;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -28,6 +33,11 @@ class Activation {
 			);
 		}
 
-		// Flush rewrite rules or setup defaults when needed in later phases.
+		DiagramPostType::register();
+		DiagramTaxonomies::register();
+		DiagramMeta::register();
+		DiagramCapabilities::assign_default_capabilities();
+
+		flush_rewrite_rules();
 	}
 }

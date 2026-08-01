@@ -6,13 +6,13 @@ Implement this phase through the existing modular-monolith layers. Presentation 
 
 ## Implementation work
 
-- [ ] Create one plugin bootstrap and service-provider/loader architecture under `WebFalcon\MermaidDiagrams`.
-- [ ] Implement domain value objects and aggregate rules for source, source hash, title, description, status, detected type, validation receipt, version token, category IDs, tag IDs, and presentation defaults.
-- [ ] Register `mdm_diagram` CPT, `mdm_diagram_category`, and `mdm_diagram_tag` with explicit capability mapping and `show_in_rest` where appropriate.
-- [ ] Register protected post meta with schemas/auth callbacks; canonical source storage choice must match the data-model specification.
-- [ ] Create repository interfaces and WordPress implementations, but keep HTTP/UI out.
-- [ ] Create usage/dirty custom table migrations or equivalent database schema defined by ADR-accepted design.
-- [ ] Register activation roles/capabilities idempotently and supply WP-CLI inspection/repair commands where useful.
+- [x] Create one plugin bootstrap and service-provider/loader architecture under `WebFalcon\MermaidDiagrams`.
+- [x] Implement domain value objects and aggregate rules for source, source hash, title, description, status, detected type, validation receipt, version token, category IDs, tag IDs, and presentation defaults.
+- [x] Register `mdm_diagram` CPT, `mdm_diagram_category`, and `mdm_diagram_tag` with explicit capability mapping and `show_in_rest` where appropriate.
+- [x] Register protected post meta with schemas/auth callbacks; canonical source storage choice must match the data-model specification.
+- [x] Create repository interfaces and WordPress implementations, but keep HTTP/UI out.
+- [x] Create usage/dirty custom table migrations or equivalent database schema defined by ADR-accepted design.
+- [x] Register activation roles/capabilities idempotently and supply WP-CLI inspection/repair commands where useful.
 
 ## Cross-cutting requirements
 

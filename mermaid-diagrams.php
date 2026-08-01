@@ -3,7 +3,7 @@
  * Plugin Name: Mermaid Diagrams
  * Plugin URI: https://github.com/webfalcon/mermaid-diagrams
  * Description: Reusable Mermaid diagrams for WordPress.
- * Version: 0.0.0-development
+ * Version: 1.0.0
  * Requires at least: 7.0
  * Requires PHP: 8.3
  * Author: WebFalcon
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'MDM_PLUGIN_FILE', __FILE__ );
 define( 'MDM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MDM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'MDM_VERSION', '0.0.0-development' );
+define( 'MDM_VERSION', '1.0.0' );
 
 if ( file_exists( MDM_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 	require_once MDM_PLUGIN_DIR . 'vendor/autoload.php';

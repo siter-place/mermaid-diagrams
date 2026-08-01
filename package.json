@@ -1,6 +1,6 @@
 {
   "name": "mermaid-diagrams",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "node": ">=24.16.0",
@@ -27,7 +27,10 @@
     "test:e2e:update": "playwright test --update-snapshots",
     "test:rest": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local && cd ../bruno && bru run '01 Auth' --env Local",
     "test:rest:html": "export $(cat .env | grep -v '^#' | xargs) && cd bruno && bru run '00 Smoke' --env Local --reporter-html reports/smoke.html",
-    "wp:setup": "node tools/wp-env/after-start.mjs"
+    "wp:setup": "node tools/wp-env/after-start.mjs",
+    "update-version": "node scripts/increase-plugin-version.mjs",
+    "update-version:dry-run": "node scripts/increase-plugin-version.mjs --dry-run",
+    "test:versioning": "node --test tests/node/versioning/*.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.62.1",

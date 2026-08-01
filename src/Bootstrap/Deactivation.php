@@ -20,6 +20,6 @@ class Deactivation {
 	 * Run deactivation logic.
 	 */
 	public static function deactivate(): void {
-		// Deactivation routines for later phases.
+		flush_rewrite_rules();
 	}
 }

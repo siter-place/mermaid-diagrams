@@ -14,4 +14,4 @@ Use REST for browser application data/mutations. Use the Interactivity API for p
 
 After a plan phase is finalized:
 
-6. Run the post-phase documentation closeout (`.cursor/rules/post-phase-documentation.mdc`): update `docs/decisions-log.md`, `docs/CHANGELOG.md`, and any other docs affected by session decisions before ending the session.
+6. Run the post-phase documentation and automated versioning closeout (`.cursor/rules/post-phase-documentation.mdc`): trigger the `versioning` skill (`.cursor/skills/versioning/SKILL.md`), increment version via `npm run update-version`, write implementation report to `docs/implementation-logs/`, and update `docs/decision-log.md`, `CHANGELOG.md`, and affected docs before ending the session.
