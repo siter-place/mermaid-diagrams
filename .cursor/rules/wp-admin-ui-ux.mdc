@@ -1,0 +1,47 @@
+---
+description: Trigger general WordPress admin UI/UX skill and screenshot review for plugin admin interface changes
+alwaysApply: true
+---
+
+# WordPress Admin UI/UX Rule
+
+For any big or small change that touches, can affect, or visually verifies
+WordPress plugin admin UI, load and follow
+`.cursor/skills/wp-admin-ui-ux/SKILL.md` before editing.
+
+This rule applies to:
+
+- React admin apps under `assets/src/apps/**/*`.
+- Shared admin UI components, hooks, providers, API clients, and styles under
+  `assets/src/shared/**/*`.
+- PHP admin screen bootstraps, enqueue logic, settings schemas, settings REST
+  controllers, and REST response shapes consumed by admin UI.
+- Playwright E2E tests, screenshots, traces, and visual baselines for admin
+  screens.
+- Settings pages, grid/list/DataViews screens, create/edit/detail pages,
+  filters, pagination, bulk actions, empty/error/loading states, notices,
+  badges, and visual polish.
+
+Mandatory workflow:
+
+1. Use `wordpress-router`, `wp-project-triage`, and the relevant WordPress
+   skills named by the active phase or task.
+2. Load `.cursor/skills/wp-admin-ui-ux/SKILL.md`; then load its referenced files
+   that match the screen being changed.
+3. Keep WordPress capabilities, permission callbacks, nonces, sanitization,
+   escaping, and server-authoritative REST contracts intact.
+4. For any visual UI change, capture and inspect Playwright E2E screenshots.
+   Code review alone is not visual verification.
+5. Complete at least three incremental cycles: analyze screenshot, implement
+   improvements, capture again, inspect again. Each cycle should improve
+   hierarchy, interaction clarity, accessibility, responsive behavior, state
+   coverage, or visual polish.
+6. Do not update screenshot baselines until the screenshots have been inspected
+   and the new result is intentional.
+7. In the final response or implementation report, list screenshot paths
+   inspected, the three cycles completed, commands run, and any visual/a11y
+   risks left.
+
+If a task has no admin UI impact, explicitly state why the screenshot loop does
+not apply. If Playwright cannot run, record the command attempted and blocker,
+and do not claim visual verification.
