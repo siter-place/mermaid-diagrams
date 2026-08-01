@@ -1,0 +1,17 @@
+meta {
+  name: Get preview
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{apiRoot}}/diagrams/{{diagramId}}/preview
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq {{diagramId}}
+  res.body.source: isDefined
+}

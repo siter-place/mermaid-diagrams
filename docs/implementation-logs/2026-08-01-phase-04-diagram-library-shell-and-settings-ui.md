@@ -4,7 +4,7 @@
 **Phase ID:** Phase 04  
 **Phase Title:** React Diagram Library Shell and Settings UI (with UI/UX Visual Overhaul)  
 **Status:** Completed & Finalized  
-**Version Bump:** 1.3.0 → 1.3.1  
+**Version Bump:** 1.3.0 → 1.4.1  
 
 ---
 

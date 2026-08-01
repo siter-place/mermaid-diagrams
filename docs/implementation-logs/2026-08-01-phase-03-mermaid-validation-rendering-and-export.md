@@ -4,7 +4,7 @@
 **Phase ID:** Phase 03  
 **Phase Title:** Mermaid Validation, Rendering, SVG, and Validation Worker  
 **Status:** Completed  
-**Version Bump:** 1.1.0 → 1.3.1  
+**Version Bump:** 1.1.0 → 1.4.1  
 
 ---
 
@@ -20,7 +20,7 @@
 - [x] Create `tests/fixtures/corpus/` with versioned Mermaid corpus and `npm run test:corpus` runner proving browser/worker parity
 - [x] Implement unit, REST (Bruno `03 Validation/`), and Playwright render-harness tests per `tests-and-acceptance.md`
 - [x] Add `ADR-021-validation-worker-local-subprocess.md` and update architecture/REST/security documentation
-- [x] Run post-phase automated versioning closeout (`1.1.0` → `1.3.1`) and sync decision log, changelog, and manifest
+- [x] Run post-phase automated versioning closeout (`1.1.0` → `1.4.1`) and sync decision log, changelog, and manifest
 
 ---
 
@@ -107,7 +107,7 @@ All verification commands executed cleanly:
 3. **Corpus Parity Suite (`npm run test:corpus`):** 13 test cases passed with 100% browser/worker parity across flowchart, sequence, class, state, er, gantt, pie, mindmap, edge, and security edge cases.
 4. **Bruno REST API Suite (`npm run test:rest`):** 22 requests executed, 22 passed, 42/42 assertions passed.
 5. **Playwright E2E Suite (`npm run test:e2e`):** 4 passed, 7 skipped contract placeholders.
-6. **Versioning Suite (`npm run test:versioning`):** 6 tests passed, version incremented `1.1.0` → `1.3.1`.
+6. **Versioning Suite (`npm run test:versioning`):** 6 tests passed, version incremented `1.1.0` → `1.4.1`.
 
 ---
 
@@ -122,4 +122,4 @@ All verification commands executed cleanly:
 | Corpus Parity | Browser/worker parity on 13 corpus diagrams | **Complete** |
 | Download Endpoints & Policy | `/source` and `/svg` routes enforcing permissions and settings | **Complete** |
 | ADR-021 Record | Document worker subprocess architecture and trust model | **Complete** |
-| Post-Phase Version Bump | 1.1.0 → 1.3.1 via automated versioning skill | **Complete** |
+| Post-Phase Version Bump | 1.1.0 → 1.4.1 via automated versioning skill | **Complete** |

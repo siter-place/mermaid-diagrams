@@ -69,6 +69,25 @@ export interface DiagramDetail extends DiagramSummary {
 	lastEditor?: AuthorRef | null;
 }
 
+export interface DiagramPreviewPayload {
+	id: number;
+	title: string;
+	description: string;
+	type: string;
+	status: string;
+	source?: string;
+	renderConfig: RenderConfig;
+	validation: {
+		state: string;
+		receipt?: ValidationReceipt | null;
+	};
+	thumbnail: {
+		state: 'available' | 'missing';
+		attachmentId?: number | null;
+	};
+	can: CanFlags;
+}
+
 export interface PaginationMeta {
 	page: number;
 	perPage: number;
@@ -108,6 +127,7 @@ export interface CreateDiagramRequest {
 	tagIds?: number[];
 	renderConfig?: RenderConfig;
 	idempotencyKey?: string;
+	validation?: ValidationReceipt;
 }
 
 export interface UpdateDiagramRequest {

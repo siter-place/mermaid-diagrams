@@ -14,6 +14,7 @@ use WebFalcon\MermaidDiagrams\Diagram\Domain\DiagramRepository;
 use WebFalcon\MermaidDiagrams\Rest\Controller\DiagramBulkController;
 use WebFalcon\MermaidDiagrams\Rest\Controller\DiagramCollectionController;
 use WebFalcon\MermaidDiagrams\Rest\Controller\DiagramItemController;
+use WebFalcon\MermaidDiagrams\Rest\Controller\DiagramPreviewController;
 use WebFalcon\MermaidDiagrams\Rest\Controller\DiagramUsageController;
 use WebFalcon\MermaidDiagrams\Rest\Controller\SettingsController;
 use WebFalcon\MermaidDiagrams\Settings\Application\Service\SettingsApplicationService;
@@ -87,6 +88,13 @@ class RestServiceProvider implements ServiceProvider {
 		);
 
 		$container->bind(
+			DiagramPreviewController::class,
+			function ( Container $c ) {
+				return new DiagramPreviewController( $c->get( DiagramApplicationService::class ) );
+			}
+		);
+
+		$container->bind(
 			DiagramUsageController::class,
 			function ( Container $c ) {
 				return new DiagramUsageController( $c->get( DiagramApplicationService::class ) );
@@ -115,6 +123,7 @@ class RestServiceProvider implements ServiceProvider {
 				}
 				$this->container->get( DiagramCollectionController::class )->register_routes();
 				$this->container->get( DiagramItemController::class )->register_routes();
+				$this->container->get( DiagramPreviewController::class )->register_routes();
 				$this->container->get( DiagramBulkController::class )->register_routes();
 				$this->container->get( DiagramUsageController::class )->register_routes();
 				$this->container->get( SettingsController::class )->register_routes();

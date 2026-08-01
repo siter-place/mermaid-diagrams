@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-08-01
+
+### Changed
+
+- Redesigned admin UI to WordPress DataViews pattern with Table/Grid view toggle, Appearance settings popover, compact FilterBar, structured modal layouts (title/content/footer), and custom admin menu SVG icon.
+
+## [1.4.0] - 2026-08-01
+
+### Changed
+
+- Phase 05 diagram library search, filters, bulk actions, preview panel, quick-create, preview/duplicate REST endpoints, and shared DiagramViewport.
+
 ## [1.3.1] - 2026-08-01
 
 ### Changed

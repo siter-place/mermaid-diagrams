@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class UpgradeRunner {
 
 	public const OPTION_DB_VERSION = 'mdm_db_version';
-	public const TARGET_DB_VERSION = '1.3.1';
+	public const TARGET_DB_VERSION = '1.4.1';
 
 	/**
 	 * Run required database migrations.

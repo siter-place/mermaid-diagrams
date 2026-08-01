@@ -195,6 +195,8 @@ The library app owns the page below the standard WordPress admin header. It shou
 
 ### 4.4.2 Page structure
 
+**Phase 05 status:** Implemented in the React library app (`LibraryShell`, `FilterBar`, `BulkActionBar`, `PreviewPanel`, `QuickCreateModal`). URL filter state, debounced search, row selection, and bulk category Add/Remove/Replace labels match this specification.
+
 ```text
 Page header
 - Diagrams

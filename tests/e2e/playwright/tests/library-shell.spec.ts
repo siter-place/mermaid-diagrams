@@ -32,7 +32,9 @@ test.describe('Diagram library shell', () => {
 
     await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
     await expect(page.getByTestId('mdm-library-shell')).toBeVisible();
-    await expect(page.getByText(title)).toBeVisible({ timeout: 15000 });
+    await expect(
+      page.getByTestId('mdm-diagram-table').getByRole('row', { name: new RegExp(title) })
+    ).toBeVisible({ timeout: 15000 });
     await expect(page.getByTestId('mdm-diagram-table')).toBeVisible();
     await expect(page).toHaveScreenshot('library-populated.png', {
       maxDiffPixelRatio: 0.02,
@@ -58,5 +60,28 @@ test.describe('Diagram library shell', () => {
     await page.keyboard.press('Tab');
     const focused = page.locator(':focus');
     await expect(focused).toBeVisible();
+  });
+
+  test('opens quick create modal with live preview', async ({ adminPage: page }) => {
+    page.on('console', (msg) => console.log('BROWSER LOG:', msg.type(), msg.text()));
+    page.on('pageerror', (err) => console.log('BROWSER PAGEERROR:', err));
+
+    await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
+    await page.getByRole('button', { name: /add diagram/i }).click();
+
+    await expect(page.getByRole('heading', { name: /create diagram/i })).toBeVisible();
+    await page.getByLabel(/title/i).fill('Quick Create Visual Test');
+    await page
+      .getByRole('textbox', { name: /mermaid source/i })
+      .fill('flowchart TD\n  A[Start] --> B[Finish]');
+
+    await expect(page.getByTestId('mdm-diagram-viewport')).toBeVisible();
+    await expect(page.locator('.mdm-diagram-viewport svg').first()).toBeVisible({
+      timeout: 10000,
+    });
+
+    await expect(page).toHaveScreenshot('quick-create-modal.png', {
+      maxDiffPixelRatio: 0.02,
+    });
   });
 });

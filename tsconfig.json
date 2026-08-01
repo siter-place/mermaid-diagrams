@@ -15,7 +15,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@apps/*": ["apps/*"],
-      "@packages/*": ["packages/*"]
+      "@packages/*": ["packages/*"],
+      "@mdm/mermaid-runtime/*": ["packages/mermaid-runtime/src/*"]
     }
   },
   "include": [

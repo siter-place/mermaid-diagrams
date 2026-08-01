@@ -1,0 +1,26 @@
+meta {
+  name: Bulk replace categories
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{apiRoot}}/diagrams/bulk
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "ids": [{{diagramId}}],
+    "operation": "replace_categories",
+    "payload": {
+      "category_ids": [{{categoryId}}]
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.summary.succeeded: gte 0
+}

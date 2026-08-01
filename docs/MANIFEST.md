@@ -33,6 +33,7 @@ Approximate words: **55,334**
 | `architecture/adr/ADR-011-controlled-svg-featured-image.md` | 194 | `e15e0e9fe8eb2471` |
 | `architecture/adr/ADR-012-wp-env-wsl2-toolchain.md` | 87 | `d8d91d2a188c7a6c` |
 | `architecture/adr/ADR-013-coordinated-diagram-save.md` | 220 | `1be4bfd6321108d5` |
+| `architecture/adr/ADR-023-client-side-preview-render-payload.md` | Phase 05 preview ADR |
 | `architecture/adr/ADR-021-validation-worker-local-subprocess.md` | 350 | `d3e4f5a6b7c89012` |
 | `architecture/overview-diagrams.md` | 578 | `270f76bb1833a4f6` |
 | `development/agent-skills-workflow.md` | 329 | `37671285c6e67202` |
@@ -44,6 +45,7 @@ Approximate words: **55,334**
 | `implementation-logs/2026-08-01-phase-01-plugin-kernel.md` | 500 | `b2c3d4e5f67890a1` |
 | `implementation-logs/2026-08-01-phase-02-rest-api-settings-and-contracts.md` | 600 | `c3d4e5f67890a1b2` |
 | `implementation-logs/2026-08-01-phase-03-mermaid-validation-rendering-and-export.md` | 800 | `d4e5f67890a1b2c3` |
+| `implementation-logs/2026-08-01-dataviews-ui-ux-overhaul.md` | 400 | `e5f67890a1b2c3d4` |
 | `integrations/abilities-api-and-mcp.md` | 462 | `aad8f93e3b95c300` |
 | `integrations/mermaid-live-editor-adaptation.md` | 453 | `0039c9ee4c0ac050` |
 | `integrations/wordpress-ai-client-connectors.md` | 375 | `874b92fab11aec48` |

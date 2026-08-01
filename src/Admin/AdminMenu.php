@@ -24,13 +24,17 @@ class AdminMenu {
 	 * @return void
 	 */
 	public static function register_menu(): void {
+		$icon_svg = 'data:image/svg+xml;base64,' . base64_encode(
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M6 9v3a1 1 0 0 0 1 1h5m0 0h5a1 1 0 0 0 1-1V9m-6 4v2"/></svg>'
+		);
+
 		add_menu_page(
 			__( 'Mermaid Diagrams', 'mermaid-diagrams' ),
 			__( 'Diagrams', 'mermaid-diagrams' ),
 			DiagramCapabilities::CAP_EDIT_DIAGRAMS,
 			AdminRoute::LIBRARY_SLUG,
 			array( self::class, 'render_library_page' ),
-			'dashicons-chart-flow',
+			$icon_svg,
 			30
 		);
 

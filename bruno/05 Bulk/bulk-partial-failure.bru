@@ -1,0 +1,24 @@
+meta {
+  name: Bulk partial failure
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{apiRoot}}/diagrams/bulk
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "ids": [{{diagramId}}, 999999],
+    "operation": "trash"
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.summary.failed: eq 1
+  res.body.summary.succeeded: gte 1
+}

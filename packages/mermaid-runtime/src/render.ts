@@ -1,16 +1,29 @@
-import mermaid from 'mermaid';
-import { initializeMermaid, getLockedConfig } from './init';
+import { initializeMermaid, getLockedConfig, getMermaidInstance, resetInitialization } from './init-browser';
 import { parseMermaid } from './parse';
 import { sanitizeSvg } from './sanitize-svg';
 import { ensureSvgAccessibility } from './accessibility';
 import { RenderResult } from './types';
 
-const m = (mermaid as unknown as { default: typeof mermaid }).default || mermaid;
-
 let activeToken = 0;
 
+async function attemptRender(
+  id: string | undefined,
+  source: string,
+  config: Record<string, unknown>
+): Promise<{ svg: string; bindFunctions?: (element: Element) => void }> {
+  initializeMermaid(config);
+
+  const instance = getMermaidInstance();
+  if (typeof instance?.render !== 'function') {
+    throw new Error('Mermaid renderer is not available.');
+  }
+
+  const renderId = id || `mdm-render-${Math.random().toString(36).substring(2, 9)}`;
+  return instance.render(renderId, source);
+}
+
 export async function renderMermaid(
-  id: string,
+  id: string | undefined,
   source: string,
   config: Record<string, unknown> = {},
   token?: string,
@@ -23,22 +36,29 @@ export async function renderMermaid(
 
   const currentToken = token || String(++activeToken);
 
-  initializeMermaid(getLockedConfig(config));
+  let result: { svg: string; bindFunctions?: (element: Element) => void };
+  try {
+    result = await attemptRender(id, source, config);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (msg.includes('render is not a function') || msg.includes('is not available')) {
+      resetInitialization();
+      result = await attemptRender(id, source, config);
+    } else {
+      throw err;
+    }
+  }
 
-  const renderId = id || `mdm-render-${Math.random().toString(36).substring(2, 9)}`;
-  const { svg, bindFunctions } = await m.render(renderId, source);
-
-  // Stale check
   if (token && token !== currentToken) {
     throw new Error('STALE_RENDER_CANCELLED');
   }
 
-  const sanitized = sanitizeSvg(svg);
+  const sanitized = sanitizeSvg(result.svg);
   const accessible = ensureSvgAccessibility(sanitized, options?.title, options?.description);
 
   return {
     svg: accessible,
-    bindFunctions,
+    bindFunctions: result.bindFunctions,
     token: currentToken,
   };
 }

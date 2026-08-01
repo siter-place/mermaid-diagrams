@@ -71,14 +71,16 @@ export function NoticesProvider( { children }: NoticesProviderProps ) {
 	return (
 		<NoticesContext.Provider value={ value }>
 			{ children }
-			<SnackbarList
-				notices={ notices.map( ( notice ) => ( {
-					id: notice.id,
-					content: notice.content,
-					status: notice.status,
-				} ) ) }
-				onRemove={ removeNotice }
-			/>
+			<div data-testid="mdm-notices">
+				<SnackbarList
+					notices={ notices.map( ( notice ) => ( {
+						id: notice.id,
+						content: notice.content,
+						status: notice.status,
+					} ) ) }
+					onRemove={ removeNotice }
+				/>
+			</div>
 		</NoticesContext.Provider>
 	);
 }

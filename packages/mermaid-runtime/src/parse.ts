@@ -1,9 +1,6 @@
-import mermaid from 'mermaid';
-import { initializeMermaid } from './init';
+import { initializeMermaid, getMermaidInstance } from './init-browser';
 import { checkSourceConstraints } from './constraints';
 import { ParseResult, Diagnostic } from './types';
-
-const m = (mermaid as unknown as { default: typeof mermaid }).default || mermaid;
 
 export function detectDiagramType(source: string): string {
   const cleaned = source.replace(/%%.*$/gm, '').trim();
@@ -24,8 +21,19 @@ export async function parseMermaid(source: string): Promise<ParseResult> {
 
   initializeMermaid();
 
+  initializeMermaid();
+
   try {
-    const parseResult = await m.parse(source);
+    const instance = getMermaidInstance();
+    if (typeof instance?.parse !== 'function') {
+      return {
+        valid: false,
+        diagramType: detectDiagramType(source),
+        diagnostics: [{ message: 'Mermaid parser is not available.', code: 'MDM_PARSER_UNAVAILABLE' }],
+      };
+    }
+
+    const parseResult = await instance.parse(source);
     let diagramType = 'unknown';
     if (typeof parseResult === 'object' && parseResult !== null && 'diagramType' in parseResult) {
       diagramType = String((parseResult as { diagramType: string }).diagramType);

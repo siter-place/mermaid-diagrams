@@ -16,6 +16,7 @@ use WebFalcon\MermaidDiagrams\Diagram\Application\Command\TrashDiagramCommand;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Command\UpdateDiagramCommand;
 use WebFalcon\MermaidDiagrams\Diagram\Application\DTO\BulkResultDTO;
 use WebFalcon\MermaidDiagrams\Diagram\Application\DTO\DiagramDetailDTO;
+use WebFalcon\MermaidDiagrams\Diagram\Application\DTO\DiagramPreviewDTO;
 use WebFalcon\MermaidDiagrams\Diagram\Application\DTO\DiagramSummaryDTO;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Exception\EditConflictException;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Query\GetDiagramQuery;
@@ -26,6 +27,7 @@ use WebFalcon\MermaidDiagrams\Diagram\Domain\DiagramId;
 use WebFalcon\MermaidDiagrams\Diagram\Domain\DiagramRepository;
 use WebFalcon\MermaidDiagrams\Diagram\Domain\DiagramStatus;
 use WebFalcon\MermaidDiagrams\Diagram\Domain\Exception\DiagramNotFoundException;
+use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramMeta;
 use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramPostType;
 use WebFalcon\MermaidDiagrams\Diagram\Infrastructure\DiagramTaxonomies;
 
@@ -181,6 +183,23 @@ class DiagramApplicationService {
 	}
 
 	/**
+	 * Get authorized preview render payload for client-side rendering.
+	 *
+	 * @param GetDiagramQuery $query Query DTO.
+	 * @return array<string, mixed> Preview payload.
+	 * @throws DiagramNotFoundException If diagram not found.
+	 */
+	public function get_diagram_preview( GetDiagramQuery $query ): array {
+		$diagram = $this->repository->find( $query->id() );
+		if ( ! $diagram instanceof Diagram ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+			throw new DiagramNotFoundException( sprintf( 'Diagram with ID %d not found.', $query->id()->value() ) );
+		}
+
+		return DiagramPreviewDTO::from_aggregate( $diagram, get_current_user_id() );
+	}
+
+	/**
 	 * Search and list diagrams with filters, pagination, and sorting.
 	 *
 	 * @param SearchDiagramsQuery $query Search query DTO.
@@ -232,6 +251,16 @@ class DiagramApplicationService {
 			$args['tax_query'] = array_merge( array( 'relation' => 'AND' ), $tax_query );
 		}
 
+		if ( ! empty( $query->types() ) ) {
+			$args['meta_query'] = array(
+				array(
+					'key'     => DiagramMeta::META_DIAGRAM_TYPE,
+					'value'   => $query->types(),
+					'compare' => 'IN',
+				),
+			);
+		}
+
 		$wp_query = new WP_Query( $args );
 		$items    = array();
 
@@ -255,10 +284,41 @@ class DiagramApplicationService {
 				'totalPages' => (int) $wp_query->max_num_pages,
 			),
 			'facets'     => array(
-				'types'    => array(),
+				'types'    => $this->collect_type_facets(),
 				'statuses' => array( 'publish', 'draft', 'pending', 'private', 'trash' ),
 			),
 		);
+	}
+
+	/**
+	 * Collect distinct diagram type facet values from stored meta.
+	 *
+	 * @return array<string>
+	 */
+	private function collect_type_facets(): array {
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$rows = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT DISTINCT pm.meta_value
+				FROM {$wpdb->postmeta} pm
+				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+				WHERE pm.meta_key = %s
+				AND p.post_type = %s
+				AND pm.meta_value <> ''
+				ORDER BY pm.meta_value ASC
+				LIMIT 50",
+				DiagramMeta::META_DIAGRAM_TYPE,
+				DiagramPostType::CPT_SLUG
+			)
+		);
+
+		if ( ! is_array( $rows ) ) {
+			return array();
+		}
+
+		return array_values( array_filter( array_map( 'strval', $rows ) ) );
 	}
 
 	/**

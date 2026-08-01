@@ -12,10 +12,15 @@ export interface AdminBootstrap {
 	capabilities: {
 		editDiagrams: boolean;
 		manageSettings: boolean;
+		manageTerms?: boolean;
+		createDiagrams?: boolean;
+		publishDiagrams?: boolean;
 	};
+	diagramTypes?: Array< { value: string; label: string } >;
 	routes: {
 		library: string;
 		settings: string;
+		editor: string;
 		editorNew: string;
 	};
 	defaults: {

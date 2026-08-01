@@ -272,7 +272,7 @@ Errors:
 
 ### `POST /mdm/v1/diagrams/{id}/duplicate`
 
-Creates an owned draft copy. Accepts optional title and term-retention choices.
+Creates an owned draft copy. Optional body: `{ "title": "Copy name", "keepTerms": true }`. Returns a full detail DTO for the new diagram.
 
 ### `POST /mdm/v1/diagrams/bulk`
 
@@ -311,7 +311,27 @@ Response reports each item separately:
 
 ### `GET /mdm/v1/diagrams/{id}/preview`
 
-Returns render payload or a short-lived rendered preview representation according to the chosen implementation. It must not be a permanent public URL for private source.
+Returns an authorized render payload for client-side preview (ADR-023). Source is included only when the current user may read the diagram. It must not be a permanent public URL for private source.
+
+Example response:
+
+```json
+{
+  "id": 123,
+  "title": "Auth Flow",
+  "description": "",
+  "type": "flowchart",
+  "status": "draft",
+  "source": "flowchart TD\n  A-->B",
+  "renderConfig": { "theme": "default" },
+  "validation": {
+    "state": "valid",
+    "receipt": { "sourceHash": "sha256:...", "mermaidVersion": "11.4.1" }
+  },
+  "thumbnail": { "state": "missing", "attachmentId": null },
+  "can": { "edit": true, "delete": true, "publish": true }
+}
+```
 
 ### `GET /mdm/v1/diagrams/{id}/usage`
 

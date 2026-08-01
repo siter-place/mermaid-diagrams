@@ -1,5 +1,27 @@
 # Implementation Decisions Log
 
+## REL-1.4.1 — Version 1.4.1
+
+- Date: 2026-08-01
+- Version: `1.4.1`
+- Previous version: `1.4.0`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.4.1](../CHANGELOG.md#141---2026-08-01)
+
+**Decision:** Finalized DataViews UI/UX overhaul and modal design standardization with Playwright E2E coverage.
+
+## REL-1.4.0 — Version 1.4.0
+
+- Date: 2026-08-01
+- Version: `1.4.0`
+- Previous version: `1.3.1`
+- Status: Applied
+- Command: `npm run update-version`
+- Changelog: [1.4.0](../CHANGELOG.md#140---2026-08-01)
+
+**Decision:** Phase 05 Diagram Library Management Workflows vertical slice complete with tests and ADR-023.
+
 ## REL-1.3.1 — Version 1.3.1
 
 - Date: 2026-08-01

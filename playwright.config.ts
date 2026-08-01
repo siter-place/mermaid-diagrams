@@ -33,7 +33,7 @@ export default defineConfig({
     colorScheme: 'light',
     reducedMotion: 'reduce',
     viewport: { width: 1440, height: 1000 },
-    deviceScaleFactor: 1,
+    deviceScaleFactor: 2,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

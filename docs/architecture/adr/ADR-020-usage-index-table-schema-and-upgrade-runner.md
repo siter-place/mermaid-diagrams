@@ -7,7 +7,7 @@ Accepted (Phase 01)
 Phase 01 requires database migrations for `mdm_usage` and `mdm_usage_dirty` custom tables to index diagram usage across posts, pages, and blocks. The plugin also requires a versioned, idempotent database migration runner.
 
 ## Decision
-1. **Option Tracking**: Track database schema version in `mdm_db_version` option (initial target: `1.3.1`).
+1. **Option Tracking**: Track database schema version in `mdm_db_version` option (initial target: `1.4.1`).
 2. **Upgrade Runner**: Implement `WebFalcon\MermaidDiagrams\Upgrade\UpgradeRunner` executing migrations via `dbDelta()`.
 3. **Custom Usage Tables**:
    - `{$prefix}mdm_usage`: maps `diagram_id` to `consumer_id`, `consumer_type`, `block_key`, `consumer_status`, `source_revision`, and `first_seen`/`last_seen` timestamps.

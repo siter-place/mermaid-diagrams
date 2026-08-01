@@ -1,0 +1,23 @@
+meta {
+  name: Duplicate diagram
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{apiRoot}}/diagrams/{{diagramId}}/duplicate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Duplicated via Bruno"
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.title: eq Duplicated via Bruno
+  res.body.status: eq draft
+}

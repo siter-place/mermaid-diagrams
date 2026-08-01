@@ -1,19 +1,19 @@
 /**
- * Settings application shell.
+ * Settings application shell with dark vertical sidebar navigation.
  *
  * @package WebFalcon\MermaidDiagrams
  */
 
 import { useMemo, useState } from '@wordpress/element';
-import { Icon } from '@wordpress/components';
-import { cog, download, edit, layout, shield, file } from '@wordpress/icons';
+import { Button, Icon } from '@wordpress/components';
+import { cog, download, edit, layout, shield, file, info } from '@wordpress/icons';
 import { MdmErrorState } from '../../../shared/components/MdmErrorState';
 import { MdmLoadingSkeleton } from '../../../shared/components/MdmLoadingSkeleton';
+import { MdmButton } from '../../../shared/components/MdmButton';
 import { useSettingsSection } from '../../../shared/hooks/useSettingsSection';
 import { useBootstrap } from '../../../shared/providers/BootstrapProvider';
 import { RuntimeDiagnostics } from './RuntimeDiagnostics';
 import { SectionFields } from './SectionFields';
-import { SettingsSectionForm } from './SettingsSectionForm';
 
 const SECTION_ICONS: Record<string, import('@wordpress/components').IconProps<object>['icon']> = {
   rendering: cog,
@@ -22,16 +22,10 @@ const SECTION_ICONS: Record<string, import('@wordpress/components').IconProps<ob
   visual_editor: layout,
   permissions: shield,
   data_retention: file,
+  diagnostics: info,
 };
 
-const SECTION_DESCRIPTIONS: Record<string, string> = {
-  rendering: 'Configure default Mermaid theme, viewport dimensions, and rendering limits.',
-  downloads: 'Manage export and download options for Mermaid diagram source and SVG assets.',
-  editor: 'Set code editor preferences including line numbers, auto-completion, and debounce.',
-  visual_editor: 'Configure flowchart visual editing capabilities and beta feature adapters.',
-  permissions: 'Define capability requirements for publishing and library access.',
-  data_retention: 'Specify data cleanup policy when the plugin is uninstalled.',
-};
+const DIAGNOSTICS_SECTION_ID = 'diagnostics';
 
 export function SettingsShell() {
   const bootstrap = useBootstrap();
@@ -46,13 +40,11 @@ export function SettingsShell() {
     setField,
     saveSection,
     reload,
-  } = useSettingsSection(activeSection);
+  } = useSettingsSection(activeSection === DIAGNOSTICS_SECTION_ID ? 'rendering' : activeSection);
 
   const sections = useMemo(() => settings?.schema.sections ?? [], [settings]);
-  const activeSectionMeta = useMemo(
-    () => sections.find((s) => s.id === activeSection),
-    [sections, activeSection]
-  );
+
+  const isDiagnosticsActive = activeSection === DIAGNOSTICS_SECTION_ID;
 
   if (!bootstrap.capabilities.manageSettings) {
     return (
@@ -80,44 +72,93 @@ export function SettingsShell() {
     );
   }
 
+  const activeSectionMeta = sections.find((s) => s.id === activeSection);
+  const activeSectionTitle = isDiagnosticsActive
+    ? 'Runtime Diagnostics'
+    : (activeSectionMeta?.title ?? '');
+
   return (
     <div className="mdm-app-layout" data-testid="mdm-settings-shell">
       <div className="mdm-settings-layout">
-        <nav className="mdm-settings-nav" aria-label="Settings sections">
-          {sections.map((section) => {
-            const isActive = activeSection === section.id;
-            const icon = SECTION_ICONS[section.id] ?? cog;
+        <aside className="mdm-settings-sidebar">
+          <div className="mdm-settings-sidebar__header">
+            <h2 className="mdm-settings-sidebar__title">Settings</h2>
+            <p className="mdm-settings-sidebar__description">
+              Configure your Mermaid Diagrams plugin preferences.
+            </p>
+          </div>
 
-            return (
-              <button
-                key={section.id}
-                type="button"
-                className={`mdm-settings-nav-item ${isActive ? 'is-active' : ''}`}
-                onClick={() => setActiveSection(section.id)}
-                data-testid={`mdm-settings-nav-${section.id}`}
+          <nav className="mdm-settings-sidebar__nav" aria-label="Settings sections">
+            {sections.map((section) => {
+              const isActive = activeSection === section.id;
+              const icon = SECTION_ICONS[section.id] ?? cog;
+
+              return (
+                <button
+                  key={section.id}
+                  type="button"
+                  className={`mdm-settings-nav-item ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActiveSection(section.id)}
+                  data-testid={`mdm-settings-nav-${section.id}`}
+                >
+                  <Icon icon={icon} size={18} />
+                  <span>{section.title}</span>
+                </button>
+              );
+            })}
+            <button
+              type="button"
+              className={`mdm-settings-nav-item ${isDiagnosticsActive ? 'is-active' : ''}`}
+              onClick={() => setActiveSection(DIAGNOSTICS_SECTION_ID)}
+              data-testid="mdm-settings-nav-diagnostics"
+            >
+              <Icon icon={info} size={18} />
+              <span>Runtime Diagnostics</span>
+            </button>
+          </nav>
+
+          {isDirty && !isDiagnosticsActive ? (
+            <div className="mdm-settings-sidebar__footer">
+              <Button
+                variant="primary"
+                className="mdm-settings-sidebar__review-btn"
+                onClick={() => void saveSection()}
+                isBusy={isSaving}
+                disabled={isSaving}
               >
-                <Icon icon={icon} size={18} />
-                <span>{section.title}</span>
-              </button>
-            );
-          })}
-        </nav>
+                {isSaving ? 'Saving...' : 'Review 1 change\u2026'}
+              </Button>
+            </div>
+          ) : null}
+        </aside>
 
-        <SettingsSectionForm
-          sectionTitle={activeSectionMeta?.title}
-          sectionDescription={SECTION_DESCRIPTIONS[activeSection]}
-          sectionIcon={SECTION_ICONS[activeSection]}
-          isDirty={isDirty}
-          isSaving={isSaving}
-          onSave={() => {
-            void saveSection();
-          }}
-        >
-          <SectionFields sectionId={activeSection} values={sectionValues} onChange={setField} />
-        </SettingsSectionForm>
+        <main className="mdm-settings-content-card">
+          <div className="mdm-settings-content-card__header">
+            <h2 className="mdm-settings-content-card__title">{activeSectionTitle}</h2>
+            {!isDiagnosticsActive ? (
+              <MdmButton
+                variant="primary"
+                onClick={() => void saveSection()}
+                disabled={!isDirty || isSaving}
+                isBusy={isSaving}
+                data-testid="mdm-settings-save"
+              >
+                {bootstrap.i18n.saveSettings || 'Save settings'}
+              </MdmButton>
+            ) : null}
+          </div>
+
+          <div className="mdm-settings-content-card__body">
+            {isDiagnosticsActive && settings ? (
+              <RuntimeDiagnostics runtime={settings.runtime} />
+            ) : (
+              <div className="mdm-settings-form-fields">
+                <SectionFields sectionId={activeSection} values={sectionValues} onChange={setField} />
+              </div>
+            )}
+          </div>
+        </main>
       </div>
-
-      {settings ? <RuntimeDiagnostics runtime={settings.runtime} /> : null}
     </div>
   );
 }

@@ -1,9 +1,8 @@
-// Contract scaffold: activate in Phase 05 when its acceptance prerequisites are implemented.
 import { test, expect } from '../fixtures/wordpress';
 
 const baseURL = process.env.WP_BASE_URL ?? 'http://localhost:8888';
 
-test.describe.skip('Diagram library', () => {
+test.describe('Diagram library workflows', () => {
   test('creates, searches, previews, and trashes a diagram', async ({ adminPage: page }) => {
     const uniqueTitle = `E2E Flow ${Date.now()}`;
 
@@ -15,18 +14,25 @@ test.describe.skip('Diagram library', () => {
       'flowchart TD\n  A[Start] --> B[Finish]'
     );
     await page.getByRole('button', { name: /^save/i }).click();
-    await expect(page.getByText(/saved/i)).toBeVisible();
+    await expect(page.getByTestId('mdm-notices')).toContainText(/saved/i, { timeout: 15000 });
 
     await page.goto(`${baseURL}/wp-admin/admin.php?page=mdm-diagrams`);
-    await page.getByRole('searchbox').fill(uniqueTitle);
-    await expect(page.getByRole('row', { name: new RegExp(uniqueTitle) })).toBeVisible();
+    await page.locator('.mdm-filter-bar__search input').fill(uniqueTitle);
+    await expect(
+      page.getByTestId('mdm-diagram-table').getByRole('row', { name: new RegExp(uniqueTitle) })
+    ).toBeVisible({ timeout: 15000 });
 
     await page.getByRole('button', { name: new RegExp(`preview ${uniqueTitle}`, 'i') }).click();
-    await expect(page.locator('svg').first()).toBeVisible();
-    await page.getByRole('button', { name: /close/i }).click();
+    await expect(page.getByTestId('mdm-preview-panel')).toBeVisible();
+    await page
+      .getByTestId('mdm-preview-panel')
+      .getByRole('button', { name: /^close$/i })
+      .click();
 
     await page.getByRole('button', { name: new RegExp(`trash ${uniqueTitle}`, 'i') }).click();
     await page.getByRole('button', { name: /confirm/i }).click();
-    await expect(page.getByText(/moved to trash/i)).toBeVisible();
+    await expect(page.getByTestId('mdm-notices')).toContainText(/moved to trash/i, {
+      timeout: 15000,
+    });
   });
 });

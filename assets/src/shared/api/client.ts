@@ -10,6 +10,7 @@ import {
 	BulkOperationResult,
 	CreateDiagramRequest,
 	DiagramDetail,
+	DiagramPreviewPayload,
 	DiagramSearchQuery,
 	DiagramSearchResponse,
 	DiagramUsageResponse,
@@ -165,6 +166,43 @@ export async function deleteDiagram(
 		} >( {
 			path,
 			method: 'DELETE',
+		} );
+	} catch ( error ) {
+		handleApiError( error );
+	}
+}
+
+/**
+ * Get authorized preview render payload.
+ * @param id
+ * @param signal
+ */
+export async function getDiagramPreview(
+	id: number,
+	signal?: AbortSignal
+): Promise< DiagramPreviewPayload > {
+	try {
+		const path = `${ REST_NAMESPACE }/diagrams/${ id }/preview`;
+		return await apiFetch< DiagramPreviewPayload >( { path, signal } );
+	} catch ( error ) {
+		handleApiError( error );
+	}
+}
+
+/**
+ * Duplicate a diagram as a new draft copy.
+ * @param id
+ * @param options
+ */
+export async function duplicateDiagram(
+	id: number,
+	options: { title?: string; keepTerms?: boolean } = {}
+): Promise< DiagramDetail > {
+	try {
+		return await apiFetch< DiagramDetail >( {
+			path: `${ REST_NAMESPACE }/diagrams/${ id }/duplicate`,
+			method: 'POST',
+			data: options,
 		} );
 	} catch ( error ) {
 		handleApiError( error );

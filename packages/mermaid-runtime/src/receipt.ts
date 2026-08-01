@@ -4,20 +4,16 @@ import { ValidationReceiptPayload } from './types';
 
 export async function computeSha256(str: string): Promise<string> {
   const normalized = str.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-  if (typeof crypto !== 'undefined' && crypto && crypto.subtle) {
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
     const encoder = new TextEncoder();
     const data = encoder.encode(normalized);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
     return `sha256:${hex}`;
-  } else {
-    // Node.js fallback
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const nodeCrypto = require('crypto');
-    const hex = nodeCrypto.createHash('sha256').update(normalized, 'utf8').digest('hex');
-    return `sha256:${hex}`;
   }
+
+  throw new Error('Web Crypto API is unavailable.');
 }
 
 export async function createValidationReceipt(

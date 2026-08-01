@@ -13,6 +13,7 @@ use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
+use WebFalcon\MermaidDiagrams\Diagram\Application\Command\DuplicateDiagramCommand;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Command\TrashDiagramCommand;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Command\UpdateDiagramCommand;
 use WebFalcon\MermaidDiagrams\Diagram\Application\Query\GetDiagramQuery;
@@ -137,6 +138,18 @@ class DiagramItemController extends WP_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => array( $this, 'update_tags' ),
+					'permission_callback' => array( $this, 'update_item_permissions_check' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/(?P<id>[\d]+)/duplicate',
+			array(
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'duplicate_item' ),
 					'permission_callback' => array( $this, 'update_item_permissions_check' ),
 				),
 			)
@@ -326,6 +339,34 @@ class DiagramItemController extends WP_REST_Controller {
 			);
 
 			$detail = $this->diagram_service->update_diagram( $command );
+
+			return rest_ensure_response( $detail );
+		} catch ( Throwable $ex ) {
+			return WordPressErrorMapper::to_wp_error( $ex );
+		}
+	}
+
+	/**
+	 * Duplicate diagram item as a new draft copy.
+	 *
+	 * @param WP_REST_Request $request REST request.
+	 * @return WP_REST_Response|\WP_Error
+	 */
+	public function duplicate_item( $request ) {
+		try {
+			$id_val    = (int) $request->get_param( 'id' );
+			$title_str = $request->get_param( 'title' );
+			$keep_terms = null !== $request->get_param( 'keepTerms' )
+				? (bool) $request->get_param( 'keepTerms' )
+				: true;
+
+			$command = new DuplicateDiagramCommand(
+				new DiagramId( $id_val ),
+				null !== $title_str ? (string) $title_str : null,
+				$keep_terms
+			);
+
+			$detail = $this->diagram_service->duplicate_diagram( $command );
 
 			return rest_ensure_response( $detail );
 		} catch ( Throwable $ex ) {
